@@ -20,7 +20,14 @@ import { TokenInterceptor } from './services/token.interceptor';
     HttpClientModule,
     NgbModule.forRoot(),
   ],
-  providers: [LineChartService],
+  providers: [
+    LineChartService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

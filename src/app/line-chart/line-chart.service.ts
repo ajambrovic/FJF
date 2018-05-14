@@ -8,6 +8,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 @Injectable()
 export class LineChartService {
   configUrl = 'assets/config.json';
+  endpointUrl = 'https://portal.smarthabits.io/portal-backend/users/NGViYWZkMmQtYzI4YS00YTlmLWExYmQtN2YyMWUyYzRhODM5/chartdata/value';
 
   constructor(private http: HttpClient) { }
 
@@ -16,9 +17,12 @@ export class LineChartService {
   }
 
   getTemperature() {
-    const urlParameters = new HttpParams().set('param-1', 'value-1');
+    const urlParameters = new HttpParams()
+      .set('originId', '36133')
+      .set('numberOfDays', '180')
+      .set('enabledDaysInWeek', 'true');
     return this.http.get(
-      this.configUrl,
+      this.endpointUrl,
       { params: urlParameters }
     ).map(data => this.mapResponseData(data));
   }

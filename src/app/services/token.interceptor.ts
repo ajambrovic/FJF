@@ -19,7 +19,7 @@ export class TokenInterceptor implements HttpInterceptor {
 
         request = request.clone({
             setHeaders: {
-                'x-auth-token': this.token
+                'X-Auth-Token': this.token
             }
         });
 
