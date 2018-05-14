@@ -1,0 +1,28 @@
+<div class="content-section introduction">
+  <div>
+    <span class="feature-title">LineChart</span>
+    <span>Todo text</span>
+  </div>
+</div>
+
+<div class="content-section implementation">
+  <toaster-container></toaster-container>
+  <div class="row">
+    <div class="col-md-6">
+      <div *ngIf="isDataAvailable">
+        <canvas baseChart [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions" [legend]="lineChartLegend"
+          [chartType]="lineChartType" [colors]="lineChartColors"></canvas>
+      </div>
+    </div>
+    <div class="col-md-6" style="margin-bottom: 10px">
+      <table class="table table-responsive table-condensed">
+        <tr>
+          <th *ngFor="let label of lineChartLabels">{{label}}</th>
+        </tr>
+        <tr *ngFor="let d of lineChartData">
+          <td *ngFor="let label of lineChartLabels; let j=index">{{d && d.data[j]}}</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>

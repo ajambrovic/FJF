@@ -6,6 +6,7 @@ import { LineChartService } from './line-chart/line-chart.service';
 import { LineChartModule } from './line-chart/line-chart.module';
 import { HttpClientModule } from '@angular/common/http';
 import { ToasterModule, ToasterService } from 'angular2-toaster';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { ToasterModule, ToasterService } from 'angular2-toaster';
   imports: [
     BrowserModule,
     LineChartModule,
-    HttpClientModule
+    HttpClientModule,
+    NgbModule.forRoot(),
   ],
   providers: [LineChartService],
   bootstrap: [AppComponent]
