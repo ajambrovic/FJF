@@ -7,6 +7,8 @@ import { LineChartModule } from './line-chart/line-chart.module';
 import { HttpClientModule } from '@angular/common/http';
 import { ToasterModule, ToasterService } from 'angular2-toaster';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { TokenInterceptor } from './services/token.interceptor';
 
 @NgModule({
   declarations: [
