@@ -3,12 +3,14 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { AuthenticationService } from '../login/services/authentication.service';
 
 @Component({
-  selector: 'app-navbar',
-  templateUrl: './navbar.component.html'
+    selector: 'app-navbar',
+    templateUrl: './navbar.component.html'
 })
 export class NavbarComponent {
 
-  constructor(
+    title = 'Smart Habits';
+
+    constructor(
         private route: ActivatedRoute,
         private router: Router,
         private authenticationService: AuthenticationService) { }
