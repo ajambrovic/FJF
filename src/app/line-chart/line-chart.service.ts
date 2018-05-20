@@ -26,4 +26,13 @@ export class LineChartService {
       { params: urlParameters }
     ).map(data => this.mapResponseData(data));
   }
+
+  getTemperatureHardcoded() {
+    const urlParameters = new HttpParams().set('param-1', 'value-1');
+    return this.http.get(
+      this.configUrl,
+      { params: urlParameters }
+    ).map(data => this.mapResponseData(data));
+  }
+
 }
