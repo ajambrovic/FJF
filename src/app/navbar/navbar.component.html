@@ -1,20 +1,8 @@
-<nav *ngIf="isLoggedIn()" class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">{{title}}</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-        aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="#">Home
-                    <span class="sr-only">(current)</span>
-                </a>
-            </li>
-        </ul>
-        <ul class="navbar-nav">
+<nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
+    <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">{{title}}</a>
+    <ul class="navbar-nav px-3">
+        <li class="nav-item text-nowrap">
             <a class="nav-link" href="#" (click)="logout()">Logout</a>
-        </ul>
-    </div>
+        </li>
+    </ul>
 </nav>

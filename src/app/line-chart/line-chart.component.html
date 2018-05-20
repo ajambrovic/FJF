@@ -1,30 +1,22 @@
-<div class="content-section introduction">
-  <div class="row">
-    <div class="col-md-12">
-      <span class="feature-title">LineChart</span>
-      <span>Home temperature for the past 5 days</span>
-    </div>
-  </div>
-</div>
+<toaster-container></toaster-container>
+<div class="content-section implementation" *ngIf="isDataAvailable">
 
-<div class="content-section implementation">
-  <toaster-container></toaster-container>
-  <div class="row">
-    <div class="col-sm-12">
-      <div *ngIf="isDataAvailable">
-        <canvas baseChart [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions" [legend]="lineChartLegend"
-          [chartType]="lineChartType"></canvas>
-      </div>
-    </div>
-    <!--div class="col-sm-12" style="margin-bottom: 10px">
-      <table class="table table-responsive table-condensed">
+  <canvas baseChart [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions" [legend]="lineChartLegend"
+    [chartType]="lineChartType"></canvas>
+
+  <h2>Home temperature for the past 5 days</h2>
+  <div class="table-responsive">
+    <table class="table table-striped table-sm">
+      <thead>
         <tr>
           <th *ngFor="let label of lineChartLabels">{{label}}</th>
         </tr>
+      </thead>
+      <tbody>
         <tr *ngFor="let d of lineChartData">
           <td *ngFor="let label of lineChartLabels; let j=index">{{d && d.data[j]}}</td>
         </tr>
-      </table>
-    </div-->
+      </tbody>
+    </table>
   </div>
 </div>
