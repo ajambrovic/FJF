@@ -12,24 +12,36 @@ export class LineChartService {
 
   constructor(private http: HttpClient) { }
 
+
   mapResponseData(responseData: ChartDataResponse) {
-    const responseValues = responseData[0].values;
-    const lineChartLabels = [];
-    const lineChartData = [
-      {
-        'label': 'Temperatura',
-        'data': []
-      }
+    const lineChartLabels = [
+      '0:00',
+      '2:00',
+      '4:00',
+      '6:00',
+      '8:00',
+      '10:00',
+      '12:00',
+      '14:00',
+      '16:00',
+      '18:00',
+      '20:00',
+      '22:00',
+      '24:00',
     ];
-    responseValues.forEach(value => {
-      const hours = Math.floor(value.minInDay / 60);
-      let hoursOutput = '' + hours;
-      const minutes = value.minInDay % 60;
-      let minutesOutput = '' + minutes;
-      if (hours < 10) { hoursOutput = '0' + hours; }
-      if (minutes < 10) { minutesOutput = '0' + minutes; }
-      lineChartLabels.push(hoursOutput + ':' + minutesOutput);
-      lineChartData[0].data.push(value.value.toFixed(2));
+    const lineChartData = [];
+    responseData.forEach(responseValues => {
+      const lineChartMeasure = {
+        'label': responseValues.date,
+        'data': []
+      };
+      responseValues.values.forEach(value => {
+        const hours = Math.floor(value.minInDay / 60);
+        const minutes = value.minInDay % 60;
+        lineChartMeasure.data.push(value.value.toFixed(2));
+      });
+
+      lineChartData.push(lineChartMeasure);
     });
     return { lineChartLabels, lineChartData };
   }
@@ -37,7 +49,7 @@ export class LineChartService {
   getTemperature() {
     const urlParameters = new HttpParams()
       .set('originId', '36133')
-      .set('numberOfDays', '30')
+      .set('numberOfDays', '5')
       .set('enabledDaysInWeek', 'true,true,true,true,true,true,true');
     return this.http.get(
       this.endpointUrl,

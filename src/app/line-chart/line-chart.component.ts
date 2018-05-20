@@ -18,8 +18,8 @@ export class LineChartComponent implements OnInit {
     scales: {
       yAxes: [{
         ticks: {
-          min: 12, // minimum value
-          max: 24, // maximum value
+          min: 10, // minimum value
+          max: 30, // maximum value
         }
       }]
     }
