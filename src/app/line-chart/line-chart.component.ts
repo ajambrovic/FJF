@@ -8,13 +8,14 @@ import { ToasterService } from 'angular2-toaster';
   styleUrls: ['./line-chart.component.scss']
 })
 export class LineChartComponent implements OnInit {
-
-  public lineChartLegend = true;
   public lineChartType = 'line';
   public lineChartData: Array<any>;
   public lineChartLabels: Array<any>;
   public lineChartOptions: any = {
     responsive: true,
+    legend: {
+      position: 'top',
+    },
     scales: {
       yAxes: [{
         // scale label
