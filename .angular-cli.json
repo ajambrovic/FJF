@@ -21,9 +21,6 @@
       "styles": [
         "styles.scss"
       ],
-      "scripts": [
-        "../node_modules/chart.js/src/chart.js"
-      ],
       "environmentSource": "environments/environment.ts",
       "environments": {
         "dev": "environments/environment.ts",
