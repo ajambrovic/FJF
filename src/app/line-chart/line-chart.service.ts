@@ -40,7 +40,6 @@ export class LineChartService {
         const minutes = value.minInDay % 60;
         lineChartMeasure.data.push(value.value.toFixed(2));
       });
-
       lineChartData.push(lineChartMeasure);
     });
     lineChartData.sort(function (a, b) {
@@ -61,7 +60,7 @@ export class LineChartService {
       this.mapResponseData(data));
   }
 
-  getTemperatureHardcoded() {
+  getTemperatureHardcoded(numberOfDays: number) {
     const urlParameters = new HttpParams().set('param-1', 'value-1');
     return this.http.get(
       this.configUrl,

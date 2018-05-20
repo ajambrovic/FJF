@@ -57,9 +57,9 @@ export class LineChartComponent implements OnInit {
     },
   ];
   public selectValues = [
-    { value: 5, name: '5' },
-    { value: 10, name: '10' },
-    { value: 30, name: '30' }
+    { value: 20, name: '20' },
+    { value: 30, name: '30' },
+    { value: 40, name: '40' }
   ];
 
   constructor(private service: LineChartService, private toasterService: ToasterService) { }
