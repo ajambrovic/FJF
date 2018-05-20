@@ -43,13 +43,16 @@ export class LineChartService {
 
       lineChartData.push(lineChartMeasure);
     });
+    lineChartData.sort(function (a, b) {
+      return -(new Date(a.label).getTime() - new Date(b.label).getTime());
+    });
     return { lineChartLabels, lineChartData };
   }
 
   getTemperature() {
     const urlParameters = new HttpParams()
       .set('originId', '36133')
-      .set('numberOfDays', '5')
+      .set('numberOfDays', '30')
       .set('enabledDaysInWeek', 'true,true,true,true,true,true,true');
     return this.http.get(
       this.endpointUrl,

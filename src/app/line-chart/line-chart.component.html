@@ -3,20 +3,20 @@
 
   <canvas baseChart [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions" [chartType]="lineChartType"></canvas>
 
-  <h2>Home temperature for the past 5 days</h2>
+  <h2>Podaci o temperaturi za posljednjih 30 dana</h2>
 
   <table class="table table-striped table-sm">
     <thead>
       <tr>
         <th>
-          Date
+          Datum mjerenja
         </th>
         <th *ngFor="let label of lineChartLabels">{{label}}</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let d of lineChartData">
-        <td>{{d.label}}</td>
+        <td>{{d.label | date: 'dd.MM.yyyy'}}</td>
         <td *ngFor="let label of lineChartLabels; let j=index">{{d && d.data[j]}}</td>
       </tr>
     </tbody>

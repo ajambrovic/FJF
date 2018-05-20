@@ -22,9 +22,9 @@ export class LineChartComponent implements OnInit {
         scaleLabel: {
           // display property
           display: true,
-
           // actual label
           labelString: 'Temperatura',
+          fontSize: 30,
         },
         ticks: {
           min: 10, // minimum value
@@ -39,6 +39,7 @@ export class LineChartComponent implements OnInit {
 
           // actual label
           labelString: 'Doba dana',
+          fontSize: 30,
         },
       }]
     }
