@@ -6,13 +6,15 @@ import { ToasterModule } from 'angular2-toaster';
 import 'chart.js/dist/Chart.min.js';
 import { ChartsModule } from 'ng2-charts';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
     CommonModule,
     ToasterModule.forRoot(),
     ChartsModule,
-    NgbModule
+    NgbModule,
+    FormsModule
   ],
   declarations: [LineChartComponent],
   providers: [LineChartService],

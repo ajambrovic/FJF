@@ -11,6 +11,7 @@ export class LineChartComponent implements OnInit {
   public lineChartType = 'line';
   public lineChartData: Array<any>;
   public lineChartLabels: Array<any>;
+  public numberOfDays = 30;
   public lineChartOptions: any = {
     responsive: true,
     legend: {
@@ -55,14 +56,33 @@ export class LineChartComponent implements OnInit {
       pointHoverBorderColor: 'rgba(148,159,177,0.8)'
     },
   ];
+  public selectValues = [
+    { value: 5, name: '5' },
+    { value: 10, name: '10' },
+    { value: 30, name: '30' }
+  ];
 
   constructor(private service: LineChartService, private toasterService: ToasterService) { }
 
   ngOnInit(): void {
-    this.service.getTemperature().subscribe(data => {
+    this.service.getTemperature(this.numberOfDays).subscribe(data => {
       this.lineChartLabels = data.lineChartLabels;
       this.lineChartData = data.lineChartData;
       this.isDataAvailable = true;
+    });
+  }
+
+  public onChange(newNumberOfDays) {
+    this.numberOfDays = newNumberOfDays;
+    this.service.getTemperature(this.numberOfDays).subscribe(data => {
+      this.lineChartData = [];
+      this.lineChartLabels = [];
+      data.lineChartData.forEach(dataElement => {
+        this.lineChartData.push(dataElement);
+      });
+      data.lineChartLabels.forEach(dataElement => {
+        this.lineChartLabels.push(dataElement);
+      });
     });
   }
 }

@@ -49,10 +49,10 @@ export class LineChartService {
     return { lineChartLabels, lineChartData };
   }
 
-  getTemperature() {
+  getTemperature(numberOfDays: number) {
     const urlParameters = new HttpParams()
       .set('originId', '36133')
-      .set('numberOfDays', '30')
+      .set('numberOfDays', '' + numberOfDays)
       .set('enabledDaysInWeek', 'true,true,true,true,true,true,true');
     return this.http.get(
       this.endpointUrl,
