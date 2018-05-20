@@ -12,8 +12,26 @@ export class LineChartService {
 
   constructor(private http: HttpClient) { }
 
-  mapResponseData(responseData) {
-    return responseData;
+  mapResponseData(responseData: ChartDataResponse) {
+    const responseValues = responseData[0].values;
+    const lineChartLabels = [];
+    const lineChartData = [
+      {
+        'label': 'Temperatura',
+        'data': []
+      }
+    ];
+    responseValues.forEach(value => {
+      const hours = Math.floor(value.minInDay / 60);
+      let hoursOutput = '' + hours;
+      const minutes = value.minInDay % 60;
+      let minutesOutput = '' + minutes;
+      if (hours < 10) { hoursOutput = '0' + hours; }
+      if (minutes < 10) { minutesOutput = '0' + minutes; }
+      lineChartLabels.push(hoursOutput + ':' + minutesOutput);
+      lineChartData[0].data.push(value.value.toFixed(2));
+    });
+    return { lineChartLabels, lineChartData };
   }
 
   getTemperature() {
@@ -24,7 +42,8 @@ export class LineChartService {
     return this.http.get(
       this.endpointUrl,
       { params: urlParameters }
-    ).map(data => this.mapResponseData(data));
+    ).map((data: ChartDataResponse) =>
+      this.mapResponseData(data));
   }
 
   getTemperatureHardcoded() {
@@ -32,7 +51,8 @@ export class LineChartService {
     return this.http.get(
       this.configUrl,
       { params: urlParameters }
-    ).map(data => this.mapResponseData(data));
+    ).map((data: ChartDataResponse) =>
+      this.mapResponseData(data));
   }
 
 }
