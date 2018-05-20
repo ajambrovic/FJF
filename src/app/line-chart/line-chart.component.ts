@@ -17,10 +17,28 @@ export class LineChartComponent implements OnInit {
     responsive: true,
     scales: {
       yAxes: [{
+        // scale label
+        scaleLabel: {
+          // display property
+          display: true,
+
+          // actual label
+          labelString: 'Temperatura',
+        },
         ticks: {
           min: 10, // minimum value
           max: 30, // maximum value
         }
+      }],
+      xAxes: [{
+        // scale label
+        scaleLabel: {
+          // display property
+          display: true,
+
+          // actual label
+          labelString: 'Doba dana',
+        },
       }]
     }
   };
