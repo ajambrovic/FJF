@@ -14,7 +14,15 @@ export class LineChartComponent implements OnInit {
   public lineChartData: Array<any>;
   public lineChartLabels: Array<any>;
   public lineChartOptions: any = {
-    responsive: true
+    responsive: true,
+    scales: {
+      yAxes: [{
+        ticks: {
+          min: 12, // minimum value
+          max: 24, // maximum value
+        }
+      }]
+    }
   };
   public isDataAvailable = false;
   public lineChartColors: Array<any> = [
