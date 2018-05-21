@@ -1,14 +1,14 @@
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center">
   <div class="btn-toolbar ml-auto">
     <div class="btn-group mr-2">
-      <button class="btn btn-sm btn-outline-secondary">Izvoz</button>
+      <a class="btn btn-sm btn-outline-secondary" (click)="downloadCanvas($event)">Izvoz</a>
     </div>
   </div>
 </div>
 <toaster-container></toaster-container>
 <div class="content-section implementation" *ngIf="isDataAvailable">
 
-  <canvas baseChart [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions" [chartType]="lineChartType"></canvas>
+  <canvas #temperatureChart baseChart [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions" [chartType]="lineChartType"></canvas>
 
   <form class="form-inline">
     <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Podaci o temperaturi za posljednjih</label>
@@ -30,7 +30,7 @@
     </thead>
     <tbody>
       <tr *ngFor="let d of lineChartData">
-        <td>{{d.label | date: 'dd.MM.yyyy'}}</td>
+        <td>{{d.label}}</td>
         <td *ngFor="let label of lineChartLabels; let j=index">{{d && d.data[j]}}</td>
       </tr>
     </tbody>

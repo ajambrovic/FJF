@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { DatePipe } from '@angular/common';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/map';
@@ -10,10 +11,26 @@ export class LineChartService {
   configUrl = 'assets/config.json';
   endpointUrl = 'https://portal.smarthabits.io/portal-backend/users/NGViYWZkMmQtYzI4YS00YTlmLWExYmQtN2YyMWUyYzRhODM5/chartdata/value';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private datePipe: DatePipe) { }
 
+  transformToLineChartData(responseValues: any) {
+    if (responseValues.values.length < 13) {
+      return;
+    }
+    const lineChartMeasure = {
+      'label': this.datePipe.transform(responseValues.date, 'dd.MM.yyyy'),
+      'data': []
+    };
+    responseValues.values.forEach(value => {
+      const hours = Math.floor(value.minInDay / 60);
+      const minutes = value.minInDay % 60;
+      lineChartMeasure.data.push(value.value.toFixed(2));
+    });
+    return lineChartMeasure;
+  }
 
   mapResponseData(responseData: ChartDataResponse) {
+    // to config
     const lineChartLabels = [
       '0:00',
       '2:00',
@@ -30,24 +47,16 @@ export class LineChartService {
       '24:00',
     ];
     const lineChartData = [];
+    responseData.sort(function (a, b) {
+      return new Date(b.date).getTime() - new Date(a.date).getTime();
+    });
     responseData.forEach(responseValues => {
-      if (responseValues.values.length < 13) {
-        return;
+      const transformedData = this.transformToLineChartData(responseValues);
+      if (!!transformedData) {
+        lineChartData.push(transformedData);
       }
-      const lineChartMeasure = {
-        'label': responseValues.date,
-        'data': []
-      };
-      responseValues.values.forEach(value => {
-        const hours = Math.floor(value.minInDay / 60);
-        const minutes = value.minInDay % 60;
-        lineChartMeasure.data.push(value.value.toFixed(2));
-      });
-      lineChartData.push(lineChartMeasure);
     });
-    lineChartData.sort(function (a, b) {
-      return -(new Date(a.label).getTime() - new Date(b.label).getTime());
-    });
+
     return { lineChartLabels, lineChartData };
   }
 

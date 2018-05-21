@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { LineChartService } from './line-chart.service';
 import { ToasterService } from 'angular2-toaster';
 
@@ -8,6 +8,10 @@ import { ToasterService } from 'angular2-toaster';
   styleUrls: ['./line-chart.component.scss']
 })
 export class LineChartComponent implements OnInit {
+  @ViewChild('temperatureChart') temperatureChart;
+  public isDataAvailable = false;
+
+  // config start
   public lineChartType = 'line';
   public lineChartData: Array<any>;
   public lineChartLabels: Array<any>;
@@ -45,7 +49,6 @@ export class LineChartComponent implements OnInit {
       }]
     }
   };
-  public isDataAvailable = false;
   public lineChartColors: Array<any> = [
     { // grey
       backgroundColor: 'rgba(148,159,177,0.2)',
@@ -61,6 +64,8 @@ export class LineChartComponent implements OnInit {
     { value: 30, name: '30' },
     { value: 40, name: '40' }
   ];
+
+  // config end
 
   constructor(private service: LineChartService, private toasterService: ToasterService) { }
 
@@ -84,5 +89,15 @@ export class LineChartComponent implements OnInit {
         this.lineChartLabels.push(dataElement);
       });
     });
+  }
+
+  public downloadCanvas($event) {
+    const anchor = event.target;
+    // get the canvas, I'm getting it by tag name, you can do by id
+    // and set the href of the anchor to the canvas dataUrl
+    anchor['href'] = this.temperatureChart.nativeElement.toDataURL();
+    // set the anchors 'download' attibute (name of the file to be downloaded)
+    const filename = 'Temperatura: ' + this.lineChartData[0].label + '_' + this.lineChartData[this.lineChartData.length - 1].label;
+    anchor['download'] = filename + '.png';
   }
 }
