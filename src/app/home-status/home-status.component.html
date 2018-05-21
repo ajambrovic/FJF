@@ -1,0 +1,32 @@
+<div class="container" *ngIf="!!homeEnvironment">
+    <img class="ui-icon" src="/assets/open-iconic/svg/home.svg" alt="home">&nbsp;Smart home:&nbsp;<b> {{homeEnvironment.homeName}}</b>
+    <ul class="list-group" *ngFor="let indoorLocation of homeEnvironment.indoorLocationsWithSensorsAndValues">
+        <li class="list-group-item" *ngFor="let sensor of indoorLocation.sensorValues">
+            <div class="container">
+                <div class="row">
+                    <div class="col-1">
+                        <img class="ui-icon" [src]="sensor.iconUrl" [alt]="sensor.iconText">
+                    </div>
+                    <div class="col">
+                        {{sensor.sensorName}}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-1">
+                    </div>
+                    <div class="col">
+                        <b>{{sensor.value}}</b>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-1">
+                        <img class="ui-icon" src="/assets/open-iconic/svg/clock.svg" alt="time">
+                    </div>
+                    <div class="col">
+                        {{sensor.dateTime}}
+                    </div>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>

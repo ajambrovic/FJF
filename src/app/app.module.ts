@@ -15,6 +15,7 @@ import { RoutingModule } from './app.routing';
 import { AuthGuard } from './guards/auth.guard';
 import { NavbarModule } from './navbar/navbar.module';
 import { GlobalErrorHandler } from './common/global-error.handler';
+import { HomeStatusModule } from './home-status/home-status.module';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { GlobalErrorHandler } from './common/global-error.handler';
     BrowserAnimationsModule,
     LoginModule,
     NavbarModule,
+    HomeStatusModule,
     LineChartModule,
     HttpClientModule,
     RoutingModule,
