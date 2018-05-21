@@ -31,6 +31,9 @@ export class LineChartService {
     ];
     const lineChartData = [];
     responseData.forEach(responseValues => {
+      if (responseValues.values.length < 13) {
+        return;
+      }
       const lineChartMeasure = {
         'label': responseValues.date,
         'data': []
