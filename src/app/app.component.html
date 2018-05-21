@@ -23,13 +23,8 @@
       </nav>
 
       <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-5 px-4" *ngIf="authenticationService.isLoggedIn()">
-        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center border-bottom">
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center">
           <h1 class="h2">Dashboard</h1>
-          <div class="btn-toolbar mb-2 mb-md-0">
-            <div class="btn-group mr-2">
-              <button class="btn btn-sm btn-outline-secondary">Izvoz</button>
-            </div>
-          </div>
         </div>
         <router-outlet></router-outlet>
       </main>
