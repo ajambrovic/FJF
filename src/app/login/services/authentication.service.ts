@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
+import { HttpClient } from '@angular/common/http';
 import 'rxjs/add/operator/map';
 
 @Injectable()
@@ -9,8 +8,8 @@ export class AuthenticationService {
 
     login(username: string, password: string) {
         // TODO url from config
-        const params = {username: username};
-        return this.http.post<any>(`https://portal.smarthabits.io/login-service/login/caregiver`, password, {params: params})
+        const params = { username: username };
+        return this.http.post<any>(`https://portal.smarthabits.io/login-service/login/caregiver`, password, { params: params })
             .map(user => {
                 // login successful if there's a user in the response
                 if (!!user) {

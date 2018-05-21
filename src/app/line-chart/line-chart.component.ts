@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { LineChartService } from './line-chart.service';
-import { ToasterService } from 'angular2-toaster';
+import { ApplicationError } from '../common/domain/application.error';
 
 @Component({
   selector: 'app-line-chart',
@@ -67,14 +67,19 @@ export class LineChartComponent implements OnInit {
 
   // config end
 
-  constructor(private service: LineChartService, private toasterService: ToasterService) { }
+  constructor(private service: LineChartService) { }
 
   ngOnInit(): void {
-    this.service.getTemperature(this.numberOfDays).subscribe(data => {
-      this.lineChartLabels = data.lineChartLabels;
-      this.lineChartData = data.lineChartData;
-      this.isDataAvailable = true;
-    });
+    this.service.getTemperature(this.numberOfDays).subscribe(
+      data => {
+        this.lineChartLabels = data.lineChartLabels;
+        this.lineChartData = data.lineChartData;
+        this.isDataAvailable = true;
+      },
+      error => {
+        throw new ApplicationError(error);
+      }
+    );
   }
 
   public onChange(newNumberOfDays) {
@@ -92,7 +97,7 @@ export class LineChartComponent implements OnInit {
   }
 
   public downloadCanvas($event) {
-    const anchor = event.target;
+    const anchor = $event.target;
     // get the canvas, I'm getting it by tag name, you can do by id
     // and set the href of the anchor to the canvas dataUrl
     anchor['href'] = this.temperatureChart.nativeElement.toDataURL();

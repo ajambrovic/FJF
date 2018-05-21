@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { DatePipe } from '@angular/common';
-import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/map';
 import { HttpClient, HttpParams } from '@angular/common/http';
@@ -22,8 +21,6 @@ export class LineChartService {
       'data': []
     };
     responseValues.values.forEach(value => {
-      const hours = Math.floor(value.minInDay / 60);
-      const minutes = value.minInDay % 60;
       lineChartMeasure.data.push(value.value.toFixed(2));
     });
     return lineChartMeasure;

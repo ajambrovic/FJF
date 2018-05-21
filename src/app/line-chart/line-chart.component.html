@@ -5,7 +5,6 @@
     </div>
   </div>
 </div>
-<toaster-container></toaster-container>
 <div class="content-section implementation" *ngIf="isDataAvailable">
 
   <canvas #temperatureChart baseChart [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions" [chartType]="lineChartType"></canvas>

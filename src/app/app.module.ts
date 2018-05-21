@@ -39,7 +39,9 @@ import { GlobalErrorHandler } from './common/global-error.handler';
       multi: true
     },
     AuthGuard,
-    { provide: ErrorHandler, useClass: GlobalErrorHandler }],
+    { provide: ErrorHandler, useClass: GlobalErrorHandler },
+    ToasterService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
