@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { LineChartService } from './line-chart.service';
 import { ApplicationError } from '../common/domain/application.error';
+import { ALineChartConfig } from './line-chart-config';
 
 @Component({
   selector: 'app-line-chart',
@@ -11,63 +12,21 @@ export class LineChartComponent implements OnInit {
   @ViewChild('temperatureChart') temperatureChart;
   public isDataAvailable = false;
 
-  // config start
-  public lineChartType = 'line';
   public lineChartData: Array<any>;
   public lineChartLabels: Array<any>;
-  public numberOfDays = 30;
-  public lineChartOptions: any = {
-    responsive: true,
-    legend: {
-      position: 'top',
-    },
-    scales: {
-      yAxes: [{
-        // scale label
-        scaleLabel: {
-          // display property
-          display: true,
-          // actual label
-          labelString: 'Temperatura',
-          fontSize: 30,
-        },
-        ticks: {
-          min: 10, // minimum value
-          max: 30, // maximum value
-        }
-      }],
-      xAxes: [{
-        // scale label
-        scaleLabel: {
-          // display property
-          display: true,
 
-          // actual label
-          labelString: 'Doba dana',
-          fontSize: 30,
-        },
-      }]
-    }
-  };
-  public lineChartColors: Array<any> = [
-    { // grey
-      backgroundColor: 'rgba(148,159,177,0.2)',
-      borderColor: 'rgba(148,159,177,1)',
-      pointBackgroundColor: 'rgba(148,159,177,1)',
-      pointBorderColor: '#fff',
-      pointHoverBackgroundColor: '#fff',
-      pointHoverBorderColor: 'rgba(148,159,177,0.8)'
-    },
-  ];
-  public selectValues = [
-    { value: 20, name: '20' },
-    { value: 30, name: '30' },
-    { value: 40, name: '40' }
-  ];
+  constructor(
+    private lineChartConfig: ALineChartConfig,
+    private service: LineChartService) { }
 
+  // config start
+  public lineChartType = this.lineChartConfig.lineChartType;
+  public numberOfDays = this.lineChartConfig.defaultNumberOfDays;
+  public lineChartOptions = this.lineChartConfig.lineChartOptions;
+  public lineChartColors = this.lineChartColors;
+
+  public selectValues = this.lineChartConfig.selectDropdownValues;
   // config end
-
-  constructor(private service: LineChartService) { }
 
   ngOnInit(): void {
     this.service.getTemperature(this.numberOfDays).subscribe(

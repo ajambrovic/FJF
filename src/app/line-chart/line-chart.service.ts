@@ -11,7 +11,10 @@ export class LineChartService {
   configUrl = 'assets/config.json';
   endpointUrl = this.config.chartDataEndpoint;
 
-  constructor(private config: AGeneralConfig, private http: HttpClient, private datePipe: DatePipe) { }
+  constructor(
+    private config: AGeneralConfig,
+    private http: HttpClient,
+    private datePipe: DatePipe) { }
 
   transformToLineChartData(responseValues: any) {
     if (responseValues.values.length < 13) {
