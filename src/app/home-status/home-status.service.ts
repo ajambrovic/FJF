@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
+import { DatePipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import 'rxjs/add/operator/map';
 import { HomeEnvironment } from './domain/home-environment.model';
 import { Sensor } from './domain/sensor.model';
 import { Location } from './domain/location.model';
+import { AGeneralConfig } from '../domain/general-config';
 
 enum SensorType {
     REED_DOOR = 'REED_DOOR',
@@ -18,16 +20,13 @@ enum SensorType {
 export class HomeStatusService {
 
 
-    constructor(private http: HttpClient) { }
+    constructor(private config: AGeneralConfig, private http: HttpClient, private datePipe: DatePipe) { }
 
 
     getHomeStatus() {
+        const url = this.config.homeStatusEndpoint;
 
-        // TODO homeId from environment config?
-        const homeId = 'MTFjM2IyYTQtZGRmZi00YTI4LWI3YWEtYmQyMjlmZTUwNGEw';
-
-
-        return this.http.get<HomeEnvironment>(`https://portal.smarthabits.io/portal-backend/homes/${homeId}/aggregatedstatus`)
+        return this.http.get<HomeEnvironment>(url)
             .map(homeEnvironment => {
                 return this.mapHomeEnviroment(homeEnvironment);
             });
@@ -133,7 +132,6 @@ export class HomeStatusService {
     }
 
     getFormattedTimestamp(timestamp: number) {
-        const date = new Date(timestamp);
-        return date.toLocaleString();
+        return this.datePipe.transform(timestamp, this.config.dateTimeFormat);
     }
 }
