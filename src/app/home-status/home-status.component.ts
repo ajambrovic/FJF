@@ -1,8 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HomeEnvironment } from './domain/home-environment.model';
-import { Location } from './domain/location.model';
 import { HomeStatusService } from './home-status.service';
-import { Sensor } from './domain/sensor.model';
 
 @Component({
     selector: 'app-home-status',
