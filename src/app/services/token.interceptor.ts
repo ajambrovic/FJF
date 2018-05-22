@@ -7,11 +7,12 @@ import {
 } from '@angular/common/http';
 
 import { Observable } from 'rxjs/Observable';
+import { AuthenticationService } from '../login/services/authentication.service';
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
 
-    constructor() { }
+    constructor(private authService: AuthenticationService) { }
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         const token = this.getToken();
@@ -27,7 +28,7 @@ export class TokenInterceptor implements HttpInterceptor {
     }
 
     private getToken() {
-        const user = JSON.parse(localStorage.getItem('currentUser'));
+        const user = this.authService.getLoggedInUser();
         if (!!user) {
             return user.token;
         }

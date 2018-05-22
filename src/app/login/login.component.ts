@@ -29,13 +29,13 @@ export class LoginComponent implements OnInit {
         this.loading = true;
         this.authenticationService.login(this.model.username, this.model.password)
             .subscribe(
-                () => {
-                    this.router.navigate([this.returnUrl]);
-                },
-                error => {
-                    this.loading = false;
-                    throw new ApplicationError(error);
-                });
+            () => {
+                this.router.navigate([this.returnUrl]);
+            },
+            error => {
+                this.loading = false;
+                throw new ApplicationError(error);
+            });
     }
 
 }
