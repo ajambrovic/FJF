@@ -15,9 +15,10 @@ import { RoutingModule } from './app.routing';
 import { AuthGuard } from './guards/auth.guard';
 import { NavbarModule } from './navbar/navbar.module';
 import { GlobalErrorHandler } from './common/global-error.handler';
-import { GeneralConfigImpl } from '../environments/environment';
+import { GeneralConfigImpl, LineChartComponentConfigImpl } from '../environments/environment';
 import { AGeneralConfig } from './domain/general-config';
 import { HomeStatusModule } from './home-status/home-status.module';
+import { ALineChartConfig } from './line-chart/line-chart-config';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,8 @@ import { HomeStatusModule } from './home-status/home-status.module';
     AuthGuard,
     { provide: ErrorHandler, useClass: GlobalErrorHandler },
     { provide: AGeneralConfig, useExisting: GeneralConfigImpl },
+    { provide: ALineChartConfig, useExisting: LineChartComponentConfigImpl},
+    LineChartComponentConfigImpl,
     GeneralConfigImpl
   ],
   bootstrap: [AppComponent]
