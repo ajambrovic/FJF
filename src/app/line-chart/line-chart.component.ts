@@ -84,16 +84,21 @@ export class LineChartComponent implements OnInit {
 
   public onChange(newNumberOfDays) {
     this.numberOfDays = newNumberOfDays;
-    this.service.getTemperature(this.numberOfDays).subscribe(data => {
-      this.lineChartData = [];
-      this.lineChartLabels = [];
-      data.lineChartData.forEach(dataElement => {
-        this.lineChartData.push(dataElement);
-      });
-      data.lineChartLabels.forEach(dataElement => {
-        this.lineChartLabels.push(dataElement);
-      });
-    });
+    this.service.getTemperature(this.numberOfDays).subscribe(
+      data => {
+        this.lineChartData = [];
+        this.lineChartLabels = [];
+        data.lineChartData.forEach(dataElement => {
+          this.lineChartData.push(dataElement);
+        });
+        data.lineChartLabels.forEach(dataElement => {
+          this.lineChartLabels.push(dataElement);
+        });
+      },
+      error => {
+        throw new ApplicationError(error);
+      }
+    );
   }
 
   public downloadCanvas($event) {
