@@ -1,4 +1,4 @@
-import { Injectable, Inject } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/map';
