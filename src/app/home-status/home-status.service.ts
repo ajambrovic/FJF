@@ -5,14 +5,27 @@ import { HomeEnvironment } from './domain/home-environment.model';
 import { Sensor } from './domain/sensor.model';
 import { Location } from './domain/location.model';
 
+enum SensorType {
+    REED_DOOR = 'REED_DOOR',
+    HUMIDITY = 'HUMIDITY',
+    TEMPERATURE = 'TEMPERATURE',
+    ILLUMINANCE = 'ILLUMINANCE',
+    POWER = 'POWER',
+    MOTION = 'MOTION'
+}
+
 @Injectable()
 export class HomeStatusService {
+
+
     constructor(private http: HttpClient) { }
+
 
     getHomeStatus() {
 
-        // TODO homeId from somewhere else?
+        // TODO homeId from environment config?
         const homeId = 'MTFjM2IyYTQtZGRmZi00YTI4LWI3YWEtYmQyMjlmZTUwNGEw';
+
 
         return this.http.get<HomeEnvironment>(`https://portal.smarthabits.io/portal-backend/homes/${homeId}/aggregatedstatus`)
             .map(homeEnvironment => {
@@ -35,19 +48,22 @@ export class HomeStatusService {
     }
 
     getSensorInfo(sensor: Sensor) {
+        const baseUrl = '/assets/open-iconic/svg';
         switch (sensor.sensorType) {
-            case ('REED_DOOR'):
-                return { iconUrl: '/assets/open-iconic/svg/bell.svg', iconText: 'door' };
-            case ('HUMIDITY'):
-                return { iconUrl: '/assets/open-iconic/svg/droplet.svg', iconText: 'humidity' };
-            case ('TEMPERATURE'):
-                return { iconUrl: '/assets/open-iconic/svg/badge.svg', iconText: 'temperature' };
-            case ('ILLUMINANCE'):
-                return { iconUrl: '/assets/open-iconic/svg/sun.svg', iconText: 'illuminance' };
-            case ('POWER'):
-                return { iconUrl: '/assets/open-iconic/svg/lightbulb.svg', iconText: 'power' };
+            case (SensorType.REED_DOOR):
+                return { iconUrl: `${baseUrl}/bell.svg`, iconText: 'door' };
+            case (SensorType.HUMIDITY):
+                return { iconUrl: `${baseUrl}/droplet.svg`, iconText: 'humidity' };
+            case (SensorType.TEMPERATURE):
+                return { iconUrl: `${baseUrl}/badge.svg`, iconText: 'temperature' };
+            case (SensorType.ILLUMINANCE):
+                return { iconUrl: `${baseUrl}/sun.svg`, iconText: 'illuminance' };
+            case (SensorType.POWER):
+                return { iconUrl: `${baseUrl}/lightbulb.svg`, iconText: 'power' };
+            case (SensorType.MOTION):
+                return { iconUrl: `${baseUrl}/audio.svg`, iconText: 'sensor' };
             default:
-                return { iconUrl: '/assets/open-iconic/svg/audio.svg', iconText: 'sensor' };
+                return { iconUrl: `${baseUrl}/infinity.svg`, iconText: 'sensor' };
         }
     }
 
@@ -64,17 +80,17 @@ export class HomeStatusService {
 
     getFormattedValue(sensor: Sensor) {
         switch (sensor.sensorType) {
-            case ('REED_DOOR'):
+            case (SensorType.REED_DOOR):
                 return this.getDoorSensorValue(sensor.value);
-            case ('HUMIDITY'):
+            case (SensorType.HUMIDITY):
                 return this.getHumiditySensorValue(sensor.value);
-            case ('TEMPERATURE'):
+            case (SensorType.TEMPERATURE):
                 return this.getTemperatureSensorValue(sensor.value);
-            case ('ILLUMINANCE'):
+            case (SensorType.ILLUMINANCE):
                 return this.getIlluminanceSensorValue(sensor.value);
-            case ('POWER'):
+            case (SensorType.POWER):
                 return this.getPowerSensorValue(sensor);
-            case ('MOTION'):
+            case (SensorType.MOTION):
                 return this.getMotionSensorValue(sensor.value);
             default:
                 return sensor.value;
