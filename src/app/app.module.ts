@@ -17,6 +17,7 @@ import { NavbarModule } from './navbar/navbar.module';
 import { GlobalErrorHandler } from './common/global-error.handler';
 import { GeneralConfigImpl } from '../environments/environment';
 import { AGeneralConfig } from './domain/general-config';
+import { HomeStatusModule } from './home-status/home-status.module';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { AGeneralConfig } from './domain/general-config';
     BrowserAnimationsModule,
     LoginModule,
     NavbarModule,
+    HomeStatusModule,
     LineChartModule,
     HttpClientModule,
     RoutingModule,
