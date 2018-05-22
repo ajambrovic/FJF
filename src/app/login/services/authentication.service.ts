@@ -1,15 +1,16 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import 'rxjs/add/operator/map';
+import { AGeneralConfig } from '../../domain/general-config';
 
 @Injectable()
 export class AuthenticationService {
-    constructor(private http: HttpClient) { }
+    constructor(private config: AGeneralConfig, private http: HttpClient) { }
 
     login(username: string, password: string) {
-        // TODO url from config
+        const url = this.config.loginEndpoint;
         const params = { username: username };
-        return this.http.post<any>(`https://portal.smarthabits.io/login-service/login/caregiver`, password, { params: params })
+        return this.http.post<any>(url, password, { params: params })
             .map(user => {
                 // login successful if there's a user in the response
                 if (!!user) {

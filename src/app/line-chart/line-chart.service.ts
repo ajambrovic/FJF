@@ -1,23 +1,24 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/map';
 import { HttpClient, HttpParams } from '@angular/common/http';
+import { AGeneralConfig } from '../domain/general-config';
 
 
 @Injectable()
 export class LineChartService {
   configUrl = 'assets/config.json';
-  endpointUrl = 'https://portal.smarthabits.io/portal-backend/users/NGViYWZkMmQtYzI4YS00YTlmLWExYmQtN2YyMWUyYzRhODM5/chartdata/value';
+  endpointUrl = this.config.chartDataEndpoint;
 
-  constructor(private http: HttpClient, private datePipe: DatePipe) { }
+  constructor(private config: AGeneralConfig, private http: HttpClient, private datePipe: DatePipe) { }
 
   transformToLineChartData(responseValues: any) {
     if (responseValues.values.length < 13) {
       return;
     }
     const lineChartMeasure = {
-      'label': this.datePipe.transform(responseValues.date, 'dd.MM.yyyy'),
+      'label': this.datePipe.transform(responseValues.date, this.config.dateFormat),
       'data': []
     };
     responseValues.values.forEach(value => {

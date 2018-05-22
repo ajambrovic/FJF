@@ -7,11 +7,12 @@ import {
 } from '@angular/common/http';
 
 import { Observable } from 'rxjs/Observable';
+import { AGeneralConfig } from '../domain/general-config';
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
 
-    constructor() { }
+    constructor(private config: AGeneralConfig) { }
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         const token = this.getToken();

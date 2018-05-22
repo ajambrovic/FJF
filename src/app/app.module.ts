@@ -15,6 +15,8 @@ import { RoutingModule } from './app.routing';
 import { AuthGuard } from './guards/auth.guard';
 import { NavbarModule } from './navbar/navbar.module';
 import { GlobalErrorHandler } from './common/global-error.handler';
+import { GeneralConfigImpl } from '../environments/environment';
+import { AGeneralConfig } from './domain/general-config';
 
 @NgModule({
   declarations: [
@@ -33,6 +35,7 @@ import { GlobalErrorHandler } from './common/global-error.handler';
   ],
   providers: [
     LineChartService,
+    ToasterService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,
@@ -40,7 +43,8 @@ import { GlobalErrorHandler } from './common/global-error.handler';
     },
     AuthGuard,
     { provide: ErrorHandler, useClass: GlobalErrorHandler },
-    ToasterService
+    { provide: AGeneralConfig, useExisting: GeneralConfigImpl },
+    GeneralConfigImpl
   ],
   bootstrap: [AppComponent]
 })
