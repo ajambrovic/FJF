@@ -1,8 +1,8 @@
 import { Routes, RouterModule } from '@angular/router';
 
 import { LoginComponent } from './login/login.component';
-import { AuthGuard } from './guards/auth.guard';
 import { LineChartComponent } from './line-chart/line-chart.component';
+import { AuthGuard } from './common/guards/auth.guard';
 
 const appRoutes: Routes = [
     { path: '', component: LineChartComponent, canActivate: [AuthGuard] },

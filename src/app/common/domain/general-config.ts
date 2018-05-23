@@ -7,4 +7,5 @@ export abstract class AGeneralConfig {
     chartDataEndpoint: string;
     dateFormat: string;
     dateTimeFormat: string;
+    iconsBaseUrl: string;
 }

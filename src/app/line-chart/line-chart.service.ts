@@ -3,7 +3,9 @@ import { DatePipe } from '@angular/common';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/map';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { AGeneralConfig } from '../domain/general-config';
+import { AGeneralConfig } from '../common/domain/general-config';
+import { Colors } from 'ng2-charts';
+
 
 
 @Injectable()
@@ -14,15 +16,13 @@ export class LineChartService {
   constructor(
     private config: AGeneralConfig,
     private http: HttpClient,
-    private datePipe: DatePipe) { }
+    private datePipe: DatePipe
+  ) { }
 
   transformToLineChartData(responseValues: any) {
-    if (responseValues.values.length < 13) {
-      return;
-    }
-    const lineChartMeasure = {
-      'label': this.datePipe.transform(responseValues.date, this.config.dateFormat),
-      'data': []
+    const lineChartMeasure: Colors = {
+      label: this.datePipe.transform(responseValues.date, this.config.dateFormat),
+      data: []
     };
     responseValues.values.forEach(value => {
       lineChartMeasure.data.push(value.value.toFixed(2));
@@ -32,21 +32,6 @@ export class LineChartService {
 
   mapResponseData(responseData: ChartDataResponse) {
     // to config
-    const lineChartLabels = [
-      '0:00',
-      '2:00',
-      '4:00',
-      '6:00',
-      '8:00',
-      '10:00',
-      '12:00',
-      '14:00',
-      '16:00',
-      '18:00',
-      '20:00',
-      '22:00',
-      '24:00',
-    ];
     const lineChartData = [];
     responseData.sort(function (a, b) {
       return new Date(b.date).getTime() - new Date(a.date).getTime();
@@ -58,7 +43,7 @@ export class LineChartService {
       }
     });
 
-    return { lineChartLabels, lineChartData };
+    return { lineChartData };
   }
 
   getTemperature(numberOfDays: number) {

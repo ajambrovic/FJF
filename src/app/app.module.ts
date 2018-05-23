@@ -12,13 +12,15 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TokenInterceptor } from './services/token.interceptor';
 import { LoginModule } from './login/login.module';
 import { RoutingModule } from './app.routing';
-import { AuthGuard } from './guards/auth.guard';
+
 import { NavbarModule } from './navbar/navbar.module';
 import { GlobalErrorHandler } from './common/global-error.handler';
 import { GeneralConfigImpl, LineChartComponentConfigImpl } from '../environments/environment';
-import { AGeneralConfig } from './domain/general-config';
+
 import { HomeStatusModule } from './home-status/home-status.module';
 import { ALineChartConfig } from './line-chart/line-chart-config';
+import { AGeneralConfig } from './common/domain/general-config';
+import { AuthGuard } from './common/guards/auth.guard';
 
 @NgModule({
   declarations: [
@@ -47,7 +49,7 @@ import { ALineChartConfig } from './line-chart/line-chart-config';
     AuthGuard,
     { provide: ErrorHandler, useClass: GlobalErrorHandler },
     { provide: AGeneralConfig, useExisting: GeneralConfigImpl },
-    { provide: ALineChartConfig, useExisting: LineChartComponentConfigImpl},
+    { provide: ALineChartConfig, useExisting: LineChartComponentConfigImpl },
     LineChartComponentConfigImpl,
     GeneralConfigImpl
   ],

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { AGeneralConfig } from '../app/domain/general-config';
 import { ALineChartConfig } from '../app/line-chart/line-chart-config';
+import { AGeneralConfig } from '../app/common/domain/general-config';
 
 // The file contents for the current environment will overwrite these during build.
 // The build system defaults to the dev environment which uses `environment.ts`, but if you do
@@ -22,6 +22,7 @@ export class GeneralConfigImpl implements AGeneralConfig {
   chartDataEndpoint = this.backendUrl + `users/${this.userId}/chartdata/value`;
   dateFormat = 'dd.MM.yyyy';
   dateTimeFormat = 'dd.MM.yyyy hh:mm:ss';
+  iconsBaseUrl = '/assets/open-iconic/svg';
 }
 
 @Injectable()
@@ -70,6 +71,21 @@ export class LineChartComponentConfigImpl implements ALineChartConfig {
       pointHoverBackgroundColor: '#fff',
       pointHoverBorderColor: 'rgba(148,159,177,0.8)'
     },
+  ];
+  lineChartLabels = [
+    '0:00',
+    '2:00',
+    '4:00',
+    '6:00',
+    '8:00',
+    '10:00',
+    '12:00',
+    '14:00',
+    '16:00',
+    '18:00',
+    '20:00',
+    '22:00',
+    '24:00',
   ];
   selectDropdownValues = [
     { value: 20, name: '20' },

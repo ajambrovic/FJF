@@ -2,11 +2,16 @@ import { HttpErrorResponse } from '@angular/common/http';
 
 export class ApplicationError extends Error {
 
-    public static GENERIC_ERROR_MESSAGE = 'General error. Please contact the administrator';
+    public static GENERIC_ERROR_MESSAGE = 'Pogreška u sustavu, molimo kontaktirajte administratora sustava.';
     item: object;
     errorSummary: string;
 
-    constructor(serverError: HttpErrorResponse, item?: object, message?: string, errorSummary?: string) {
+    constructor(
+        serverError: HttpErrorResponse,
+        item?: object,
+        message?: string,
+        errorSummary?: string
+    ) {
         super();
         this.name = ApplicationError.name;
         this.item = item;
@@ -14,11 +19,11 @@ export class ApplicationError extends Error {
         if (!!serverError && serverError instanceof HttpErrorResponse) {
             const body = serverError.error || '';
             if (serverError.status === 0) {
-                this.message = 'Server is unavailable, please try again later.';
+                this.message = 'Poslužitelj je nedostupan, molimo pokušajte ponovo kasnije.';
             } else if (serverError.status === 401 && body['error'] === 'Unauthorized') {
-                this.message = 'Authentication failure. Please login';
+                this.message = 'Autorizacijska pogreška, molimo ulogirajte se u aplikaciju.';
             } else if (serverError.status === 401) {
-                this.message = 'Wrong username and password combination';
+                this.message = 'Neispravna kombinacija korisničkog imena i lozinke';
             } else {
                 this.message = ApplicationError.GENERIC_ERROR_MESSAGE;
             }

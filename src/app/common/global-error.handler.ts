@@ -7,7 +7,9 @@ export class GlobalErrorHandler implements ErrorHandler {
     appNotificationService: ToasterService;
 
 
-    constructor(private injector: Injector) { }
+    constructor(
+        private injector: Injector
+    ) { }
 
     handleError(detail) {
         if (!this.appNotificationService) {
@@ -21,8 +23,6 @@ export class GlobalErrorHandler implements ErrorHandler {
             } else {
                 this.appNotificationService.popAsync('warning', detail['message']);
             }
-            // custom exception handling doesn't trigger change detection so we need to do it manually
-            this.appRef.tick();
         } else {
             // or a general error, e.g. reference error, unless it's a failed promise because server is unavailable, in which case
             // the error message has already been set

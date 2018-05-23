@@ -1,12 +1,16 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import 'rxjs/add/operator/map';
-import { AGeneralConfig } from '../../domain/general-config';
+import { AGeneralConfig } from '../../common/domain/general-config';
+
 
 @Injectable()
 export class AuthenticationService {
     private static readonly USER_KEY = 'currentUser';
-    constructor(private config: AGeneralConfig, private http: HttpClient) { }
+    constructor(
+        private config: AGeneralConfig,
+        private http: HttpClient
+    ) { }
 
     login(username: string, password: string) {
         const url = this.config.loginEndpoint;

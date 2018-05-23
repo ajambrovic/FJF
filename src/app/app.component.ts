@@ -10,5 +10,6 @@ export class AppComponent {
   title = 'Smart Habits';
 
   constructor(
-    public authenticationService: AuthenticationService) { }
+    public authenticationService: AuthenticationService
+  ) { }
 }

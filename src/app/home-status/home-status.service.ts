@@ -5,7 +5,8 @@ import 'rxjs/add/operator/map';
 import { HomeEnvironment } from './domain/home-environment.model';
 import { Sensor } from './domain/sensor.model';
 import { Location } from './domain/location.model';
-import { AGeneralConfig } from '../domain/general-config';
+import { AGeneralConfig } from '../common/domain/general-config';
+
 
 enum SensorType {
     REED_DOOR = 'REED_DOOR',
@@ -19,9 +20,11 @@ enum SensorType {
 @Injectable()
 export class HomeStatusService {
 
-
-    constructor(private config: AGeneralConfig, private http: HttpClient, private datePipe: DatePipe) { }
-
+    constructor(
+        private config: AGeneralConfig,
+        private http: HttpClient,
+        private datePipe: DatePipe
+    ) { }
 
     getHomeStatus() {
         const url = this.config.homeStatusEndpoint;
@@ -40,6 +43,8 @@ export class HomeStatusService {
                 sensor.iconUrl = sensorInfo.iconUrl;
                 sensor.iconText = sensorInfo.iconText;
                 sensor.dateTime = this.getFormattedTimestamp(sensor.timestamp);
+                sensor.dateTimeIconUrl = `${this.config.iconsBaseUrl}/clock.svg`;
+                sensor.dateTimeIconText = 'vrijeme';
             });
         });
 
@@ -47,22 +52,21 @@ export class HomeStatusService {
     }
 
     getSensorInfo(sensor: Sensor) {
-        const baseUrl = '/assets/open-iconic/svg';
         switch (sensor.sensorType) {
             case (SensorType.REED_DOOR):
-                return { iconUrl: `${baseUrl}/bell.svg`, iconText: 'door' };
+                return { iconUrl: `${this.config.iconsBaseUrl}/bell.svg`, iconText: 'vrata' };
             case (SensorType.HUMIDITY):
-                return { iconUrl: `${baseUrl}/droplet.svg`, iconText: 'humidity' };
+                return { iconUrl: `${this.config.iconsBaseUrl}/droplet.svg`, iconText: 'vlažnost zraka' };
             case (SensorType.TEMPERATURE):
-                return { iconUrl: `${baseUrl}/badge.svg`, iconText: 'temperature' };
+                return { iconUrl: `${this.config.iconsBaseUrl}/badge.svg`, iconText: 'temperatura' };
             case (SensorType.ILLUMINANCE):
-                return { iconUrl: `${baseUrl}/sun.svg`, iconText: 'illuminance' };
+                return { iconUrl: `${this.config.iconsBaseUrl}/sun.svg`, iconText: 'osvjetljenje' };
             case (SensorType.POWER):
-                return { iconUrl: `${baseUrl}/lightbulb.svg`, iconText: 'power' };
+                return { iconUrl: `${this.config.iconsBaseUrl}/lightbulb.svg`, iconText: 'potrošnja struje' };
             case (SensorType.MOTION):
-                return { iconUrl: `${baseUrl}/audio.svg`, iconText: 'sensor' };
+                return { iconUrl: `${this.config.iconsBaseUrl}/audio.svg`, iconText: 'pokret' };
             default:
-                return { iconUrl: `${baseUrl}/infinity.svg`, iconText: 'sensor' };
+                return { iconUrl: `${this.config.iconsBaseUrl}/infinity.svg`, iconText: 'senzor' };
         }
     }
 
@@ -98,9 +102,9 @@ export class HomeStatusService {
 
     getDoorSensorValue(value) {
         if (value === true || value === 'true') {
-            return 'open';
+            return 'otvoreno';
         } else {
-            return 'closed';
+            return 'zatvoreno';
         }
     }
 
@@ -118,16 +122,16 @@ export class HomeStatusService {
 
     getPowerSensorValue(sensor: Sensor): any {
         if (sensor.value > sensor.threshold) {
-            return 'on';
+            return 'upaljeno';
         }
-        return 'off';
+        return 'ugašeno';
     }
 
     getMotionSensorValue(value: any): any {
         if (value === true || value === 'true') {
-            return 'movement detected';
+            return 'kretanje detektirano';
         } else {
-            return 'no movement past 60 min';
+            return 'kretanje nije detektirano u posljednjih 60 minuta';
         }
     }
 

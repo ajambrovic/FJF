@@ -10,7 +10,9 @@ export class HomeStatusComponent implements OnInit {
 
     homeEnvironment: HomeEnvironment;
 
-    constructor(private homeStatusService: HomeStatusService) { }
+    constructor(
+        private homeStatusService: HomeStatusService
+    ) { }
 
     ngOnInit() {
         this.homeStatusService.getHomeStatus().subscribe(
