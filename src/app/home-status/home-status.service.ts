@@ -131,7 +131,7 @@ export class HomeStatusService {
         if (value === true || value === 'true') {
             return 'kretanje detektirano';
         } else {
-            return 'kretanje nije detektirano u posljednjih 60 minuta';
+            return 'nema pokreta u proteklih 60 min';
         }
     }
 

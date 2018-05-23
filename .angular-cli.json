@@ -10,7 +10,8 @@
       "assets": [
         "assets",
         "favicon.ico",
-        { "glob": "**/*", "input": "../node_modules/open-iconic/svg", "output": "./assets/open-iconic/svg/" }
+        { "glob": "**/*", "input": "../node_modules/open-iconic/svg", "output": "./assets/open-iconic/svg/" },
+        { "glob": "**/*", "input": "../node_modules/open-iconic/font", "output": "./assets/open-iconic/font/" }
       ],
       "index": "index.html",
       "main": "main.ts",

@@ -1,12 +1,14 @@
 <ng-container *ngIf="!!homeEnvironment">
     <h2 class="text-left">
-        <img class="ui-icon" src="/assets/open-iconic/svg/home.svg" alt="home">Smart home:
+        <img class="ui-icon mr-3" src="/assets/open-iconic/svg/home.svg" alt="home">Smart home:
         <b>{{homeEnvironment.homeName}}</b>
     </h2>
     <div class="container">
         <div *ngFor="let indoorLocation of homeEnvironment.indoorLocationsWithSensorsAndValues">
-            <img class="ui-icon" src="/assets/open-iconic/svg/map-marker.svg" alt="location">Lokacija:
-            <b>{{indoorLocation.locationName}}</b>
+            <div class="mb-2">
+                <img class="ui-icon mr-1" src="/assets/open-iconic/svg/map-marker.svg" alt="location">Lokacija:
+                <b>{{indoorLocation.locationName}}</b>
+            </div>
             <ul class="list-group">
                 <li class="list-group-item" *ngFor="let sensor of indoorLocation.sensorValues">
                     <div class="container">
