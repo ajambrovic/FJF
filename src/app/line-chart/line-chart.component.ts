@@ -41,26 +41,12 @@ export class LineChartComponent implements OnInit {
     );
   }
 
+  // TODO
   public onChange(newNumberOfDays) {
-    this.numberOfDays = newNumberOfDays;
-    this.service.getTemperature(this.numberOfDays).subscribe(
-      lineChartData => {
-        this.lineChartData = [];
-        lineChartData.forEach(dataElement => {
-          this.lineChartData.push(dataElement);
-        });
-      },
-      error => {
-        throw new ApplicationError(error);
-      }
-    );
   }
 
+  // TODO
   public downloadCanvas($event) {
-    const anchor = <HTMLAnchorElement>$event.target;
-    anchor.href = this.temperatureChart.nativeElement.toDataURL();
-    // set the anchors 'download' attibute (name of the file to be downloaded)
-    const filename = 'Temperatura: ' + this.lineChartData[0].label + '_' + this.lineChartData[this.lineChartData.length - 1].label;
-    anchor.download = filename + '.png';
+    // const anchor = <HTMLAnchorElement>$event.target;
   }
 }
