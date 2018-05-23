@@ -30,7 +30,7 @@ export class LineChartService {
     return lineChartMeasure;
   }
 
-  mapResponseData(responseData: ChartDataResponse) {
+  mapResponseData(responseData: ChartDataResponse): Array<Colors> {
     // to config
     const lineChartData = [];
     responseData.sort(function (a, b) {
@@ -43,7 +43,7 @@ export class LineChartService {
       }
     });
 
-    return { lineChartData };
+    return lineChartData;
   }
 
   getTemperature(numberOfDays: number) {
@@ -53,15 +53,6 @@ export class LineChartService {
       .set('enabledDaysInWeek', 'true,true,true,true,true,true,true');
     return this.http.get(
       this.endpointUrl,
-      { params: urlParameters }
-    ).map((data: ChartDataResponse) =>
-      this.mapResponseData(data));
-  }
-
-  getTemperatureHardcoded(numberOfDays: number) {
-    const urlParameters = new HttpParams().set('param-1', 'value-1');
-    return this.http.get(
-      this.configUrl,
       { params: urlParameters }
     ).map((data: ChartDataResponse) =>
       this.mapResponseData(data));

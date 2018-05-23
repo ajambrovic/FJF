@@ -31,8 +31,8 @@ export class LineChartComponent implements OnInit {
 
   ngOnInit(): void {
     this.service.getTemperature(this.numberOfDays).subscribe(
-      data => {
-        this.lineChartData = data.lineChartData;
+      lineChartData => {
+        this.lineChartData = lineChartData;
         this.isDataAvailable = true;
       },
       error => {
@@ -44,9 +44,9 @@ export class LineChartComponent implements OnInit {
   public onChange(newNumberOfDays) {
     this.numberOfDays = newNumberOfDays;
     this.service.getTemperature(this.numberOfDays).subscribe(
-      data => {
+      lineChartData => {
         this.lineChartData = [];
-        data.lineChartData.forEach(dataElement => {
+        lineChartData.forEach(dataElement => {
           this.lineChartData.push(dataElement);
         });
       },
