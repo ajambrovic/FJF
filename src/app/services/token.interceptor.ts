@@ -7,13 +7,11 @@ import {
 } from '@angular/common/http';
 
 import { Observable } from 'rxjs/Observable';
-import { AuthenticationService } from '../login/services/authentication.service';
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
 
     constructor(
-        private authService: AuthenticationService
     ) { }
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -30,9 +28,11 @@ export class TokenInterceptor implements HttpInterceptor {
     }
 
     private getToken() {
-        const user = this.authService.getLoggedInUser();
+        /*const user = this.authService.getLoggedInUser();
         if (!!user) {
             return user.token;
-        }
+        }*/
+        // tslint:disable-next-line:max-line-length
+        return 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiU1lTVEVNIiwiZXhwIjo0NjgxMzYwODI0LCJzdWIiOiJwb3J0YWwtYmFja2VuZCJ9.tbX-WBmBBiXAZPvw0fv-A4SPtQqRsRXy93TzQPEzA_o';
     }
 }

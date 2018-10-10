@@ -9,35 +9,19 @@
                 <img class="ui-icon mr-1" src="/assets/open-iconic/svg/map-marker.svg" alt="location">Lokacija:
                 <b>{{indoorLocation.locationName}}</b>
             </div>
-            <ul class="list-group">
-                <li class="list-group-item" *ngFor="let sensor of indoorLocation.sensorValues">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-1">
-                                <img class="ui-icon" [src]="sensor.iconUrl" [alt]="sensor.iconText">
-                            </div>
-                            <div class="col">
-                                {{sensor.sensorName}}
-                            </div>
+            <div class="row">
+                <div class="col-sm-12 col-md-4 col-lg-2 card-group" *ngFor="let sensor of indoorLocation.sensorValues">
+                    <div class="card">
+                        <h6 class="card-header"><img class="ui-icon" [src]="sensor.iconUrl" [alt]="sensor.iconText">{{sensor.sensorName}}</h6>
+                        <div class="card-body">
+                            <b>{{sensor.value}}</b>
                         </div>
-                        <div class="row">
-                            <div class="col-1">
-                            </div>
-                            <div class="col">
-                                <b>{{sensor.value}}</b>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-1">
-                                <img class="ui-icon" [src]="sensor.dateTimeIconUrl" [alt]="sensor.dateTimeIconText">
-                            </div>
-                            <div class="col">
-                                {{sensor.dateTime}}
-                            </div>
+                        <div class="card-footer">
+                            <img class="ui-icon" [src]="sensor.dateTimeIconUrl" [alt]="sensor.dateTimeIconText"> {{sensor.dateTime}}
                         </div>
                     </div>
-                </li>
-            </ul>
+                </div>
+            </div>
         </div>
     </div>
 </ng-container>
