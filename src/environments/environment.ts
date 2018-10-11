@@ -19,7 +19,7 @@ export class GeneralConfigImpl implements AGeneralConfig {
   backendUrl = 'https://demo.smarthabits.io/portal-backend/';
   loginEndpoint = 'https://demo.smarthabits.io/login-service/login/caregiver';
   homeStatusEndpoint = this.backendUrl + `homes/${this.homeId}/aggregatedstatus`;
-  chartDataEndpoint = this.backendUrl + `users/${this.userId}/chartdata/value`;
+  chartDataEndpoint = this.backendUrl + `users/${this.userId}/chartdata`;
   dateFormat = 'dd.MM.yyyy';
   dateTimeFormat = 'dd.MM.yyyy hh:mm:ss';
   iconsBaseUrl = '/assets/open-iconic/svg';

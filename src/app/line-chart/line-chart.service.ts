@@ -11,7 +11,7 @@ import { Colors } from 'ng2-charts';
 @Injectable()
 export class LineChartService {
   configUrl = 'assets/config.json';
-  endpointUrl = this.config.chartDataEndpoint;
+  endpointUrl = `${this.config.chartDataEndpoint}/value`;
 
   constructor(
     private config: AGeneralConfig,
