@@ -8,6 +8,7 @@ import { DoorSensorService } from './door-sensor.service';
     CommonModule
   ],
   declarations: [DoorSensorComponent],
-  providers: [DoorSensorService]
+  providers: [DoorSensorService],
+  exports: [DoorSensorComponent],
 })
 export class DoorSensorModule { }
