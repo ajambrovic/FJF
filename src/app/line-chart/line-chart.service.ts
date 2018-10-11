@@ -26,12 +26,13 @@ export class LineChartService {
       data: []
     };
     responseValues.values.forEach(value => {
-      lineChartMeasure.data.push(value.value.toFixed(2));
+      const formattedValue = value.value.toFixed(2);
+      lineChartMeasure.data.push(formattedValue);
     });
     return lineChartMeasure;
   }
 
-  mapResponseData(responseData: ChartDataResponse): Array<Colors> {
+  mapResponseData(responseData: TemperatureChartDataResponse): Array<Colors> {
     // to config
     const lineChartData = [];
     responseData.sort(function (a, b) {
@@ -55,7 +56,7 @@ export class LineChartService {
     return this.http.get(
       this.configUrl,
       { params: urlParameters }
-    ).map((data: ChartDataResponse) =>
+    ).map((data: TemperatureChartDataResponse) =>
       this.mapResponseData(data));
   }
 

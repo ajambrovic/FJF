@@ -11,14 +11,9 @@ import { Colors } from 'ng2-charts';
 })
 export class LineChartComponent implements OnInit {
   @ViewChild('temperatureChart') temperatureChart;
+
   public isDataAvailable = false;
-
   public lineChartData: Array<Colors>;
-
-  constructor(
-    private lineChartConfig: ALineChartConfig,
-    private service: LineChartService
-  ) { }
 
   // config start
   public lineChartType = this.lineChartConfig.lineChartType;
@@ -28,6 +23,12 @@ export class LineChartComponent implements OnInit {
   public selectValues = this.lineChartConfig.selectDropdownValues;
   public lineChartLabels = this.lineChartConfig.lineChartLabels;
   // config end
+
+  constructor(
+    private lineChartConfig: ALineChartConfig,
+    private service: LineChartService
+  ) { }
+
 
   ngOnInit(): void {
     this.service.getTemperature(this.numberOfDays).subscribe(
