@@ -85,7 +85,6 @@ export class LineChartComponentConfigImpl implements ALineChartConfig {
     '18:00',
     '20:00',
     '22:00',
-    '24:00',
   ];
   selectDropdownValues = [
     { value: 20, name: '20' },
