@@ -50,10 +50,21 @@ export class DoorSensorService {
       label: this.datePipe.transform(responseValues.date, this.config.dateFormat),
       data: []
     };
-    responseValues.intervals.forEach(interval => {
-      const formattedValue = (!!interval.value) ? interval.weight * 30 : 10;
-      lineChartMeasure.data.push(formattedValue);
+    responseValues.intervals.forEach((interval, index) => {
+      if (interval.index === index) {
+        const formattedValue = (!!interval.value) ? interval.weight * 30 : 11;
+        lineChartMeasure.data.push(formattedValue);
+      } else {
+        const formattedValue = 11;
+        lineChartMeasure.data.push(formattedValue);
+        index--;
+      }
+
     });
+    while (lineChartMeasure.data.length < 12) {
+      const formattedValue = 11;
+      lineChartMeasure.data.push(formattedValue);
+    }
     return lineChartMeasure;
   }
 }
