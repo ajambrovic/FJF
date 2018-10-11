@@ -28,7 +28,7 @@ export class GeneralConfigImpl implements AGeneralConfig {
 @Injectable()
 export class LineChartComponentConfigImpl implements ALineChartConfig {
   lineChartType = 'line';
-  defaultNumberOfDays = 180;
+  defaultNumberOfDays = 30;
   lineChartOptions: any = {
     responsive: true,
     legend: {
