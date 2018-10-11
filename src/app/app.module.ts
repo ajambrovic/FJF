@@ -22,6 +22,8 @@ import { ALineChartConfig } from './line-chart/line-chart-config';
 import { AGeneralConfig } from './common/domain/general-config';
 import { AuthGuard } from './common/guards/auth.guard';
 
+import { fakeBackendProvider } from './common/fake-backend-provider';
+
 @NgModule({
   declarations: [
     AppComponent
@@ -51,7 +53,9 @@ import { AuthGuard } from './common/guards/auth.guard';
     { provide: AGeneralConfig, useExisting: GeneralConfigImpl },
     { provide: ALineChartConfig, useExisting: LineChartComponentConfigImpl },
     LineChartComponentConfigImpl,
-    GeneralConfigImpl
+    GeneralConfigImpl,
+    // provider used to create fake backend
+    fakeBackendProvider
   ],
   bootstrap: [AppComponent]
 })
