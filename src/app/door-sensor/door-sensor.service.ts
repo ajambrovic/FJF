@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { AGeneralConfig } from '../common/domain/general-config';
 import { DatePipe } from '@angular/common';
 import { Colors } from 'ng2-charts';
 
 @Injectable()
 export class DoorSensorService {
+  originId = '31973';
   configUrl = 'assets/door-mock-data.json';
+  endpointUrl = `${this.config.chartDataEndpoint}/reedopen`;
 
   constructor(
     private config: AGeneralConfig,
@@ -15,8 +17,14 @@ export class DoorSensorService {
   ) { }
 
   getDoorSensorData(numberOfDays: number) {
+    const urlParameters = new HttpParams()
+      .set('originId', this.originId)
+      .set('numberOfDays', '' + numberOfDays)
+      .set('intervalDurationMin', '120')
+      .set('enabledDaysInWeek', 'true,true,true,true,true,true,true');
     return this.http.get(
-      this.configUrl
+      this.endpointUrl,
+      { params: urlParameters }
     ).map((data: DoorChartDataResponse) =>
       this.mapResponseData(data));
   }
