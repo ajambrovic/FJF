@@ -43,7 +43,7 @@ export class DoorSensorService {
       data: []
     };
     responseValues.intervals.forEach(interval => {
-      const formattedValue = (!!interval.value && interval.weight.toFixed(2) === '1.00') ? 1 : 0;
+      const formattedValue = (!!interval.value) ? interval.weight * 30 : 10;
       lineChartMeasure.data.push(formattedValue);
     });
     return lineChartMeasure;
