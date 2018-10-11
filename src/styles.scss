@@ -1,129 +1,136 @@
 /* You can add global styles to this file, and also import other style files */
-@import 'node_modules/angular2-toaster/src/toaster';
 
+@import 'node_modules/angular2-toaster/src/toaster';
+@import 'assets/bootstrap';
 body {
     font-size: .875rem;
-  }
-  
-  .feather {
+}
+
+.feather {
     width: 16px;
     height: 16px;
     vertical-align: text-bottom;
-  }
-  
-  /*
+}
+
+/*
    * Sidebar
    */
-  
-  .sidebar {
+
+.sidebar {
     position: fixed;
     top: 0;
     bottom: 0;
     left: 0;
-    z-index: 100; /* Behind the navbar */
+    z-index: 100;
+    /* Behind the navbar */
     padding: 0;
     box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
     text-align: left;
-  }
-  
-  .sidebar-sticky {
+}
+
+.sidebar-sticky {
     position: -webkit-sticky;
     position: sticky;
-    top: 48px; /* Height of navbar */
+    top: 48px;
+    /* Height of navbar */
     height: calc(100vh - 48px);
     padding-top: .5rem;
     overflow-x: hidden;
-    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
-  }
-  
-  .sidebar .nav-link {
+    overflow-y: auto;
+    /* Scrollable contents if viewport is shorter than content. */
+}
+
+.sidebar .nav-link {
     font-weight: 500;
     color: #333;
-  }
-  
-  .sidebar .nav-link .feather {
+}
+
+.sidebar .nav-link .feather {
     margin-right: 4px;
     color: #999;
-  }
-  
-  .sidebar .nav-link.active {
+}
+
+.sidebar .nav-link.active {
     color: #007bff;
-  }
-  
-  .sidebar .nav-link:hover .feather,
-  .sidebar .nav-link.active .feather {
+}
+
+.sidebar .nav-link:hover .feather,
+.sidebar .nav-link.active .feather {
     color: inherit;
-  }
-  
-  .sidebar-heading {
+}
+
+.sidebar-heading {
     font-size: .75rem;
     text-transform: uppercase;
-  }
-  
-  /*
+}
+
+/*
    * Navbar
    */
-  
-  .navbar-brand {
+
+.navbar-brand {
     padding-top: .75rem;
     padding-bottom: .75rem;
     font-size: 1rem;
     background-color: rgba(0, 0, 0, .25);
     box-shadow: inset -1px 0 0 rgba(0, 0, 0, .25);
-  }
-  
-  .navbar .form-control {
+}
+
+.navbar .form-control {
     padding: .75rem 1rem;
     border-width: 0;
     border-radius: 0;
-  }
-  
-  .form-control-dark {
+}
+
+.form-control-dark {
     color: #fff;
     background-color: rgba(255, 255, 255, .1);
     border-color: rgba(255, 255, 255, .1);
-  }
-  
-  .form-control-dark:focus {
+}
+
+.form-control-dark:focus {
     border-color: transparent;
     box-shadow: 0 0 0 3px rgba(255, 255, 255, .25);
-  }
-  
-  /*
+}
+
+/*
    * Utilities
    */
-  
-  .border-top { border-top: 1px solid #e5e5e5; }
-  .border-bottom { border-bottom: 1px solid #e5e5e5; }
-  
 
-  @media only screen and (max-width: 991px) {
+.border-top {
+    border-top: 1px solid #e5e5e5;
+}
+
+.border-bottom {
+    border-bottom: 1px solid #e5e5e5;
+}
+
+@media only screen and (max-width: 991px) {
     .table>tbody>tr>td,
     .table>tbody>tr>th,
     .table>tfoot>tr>td,
     .table>tfoot>tr>th,
     .table>thead>tr>td,
     .table>thead>tr>th {
-      display: block;
-      min-width: 100%!important;
+        display: block;
+        min-width: 100% !important;
     }
     .table>thead>tr>th {
-      display: none;
+        display: none;
     }
-    
     .table .filterBody span {
-      display:block;
+        display: block;
     }
-  }
+}
 
-  .list-group {
+.list-group {
     flex-direction: row;
-  }
+}
 
-  .list-group-item {
+.list-group-item {
     padding: 0.5em 0.75em;
-  }
+}
 
-  .ui-icon {
+.ui-icon {
     height: 1em;
-  }
+}
