@@ -11,7 +11,7 @@ const appRoutes: Routes = [
     { path: 'login', component: LoginComponent },
 
     // otherwise redirect to home
-    { path: '**', redirectTo: 'line-chart' }
+    { path: '**', redirectTo: 'door-sensor' }
 ];
 
 export const RoutingModule = RouterModule.forRoot(appRoutes);
