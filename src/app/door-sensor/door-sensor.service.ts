@@ -52,17 +52,17 @@ export class DoorSensorService {
     };
     responseValues.intervals.forEach((interval, index) => {
       if (interval.index === index) {
-        const formattedValue = (!!interval.value) ? interval.weight * 30 : 11;
+        const formattedValue = (!!interval.value) ? interval.weight : 0;
         lineChartMeasure.data.push(formattedValue);
       } else {
-        const formattedValue = 11;
+        const formattedValue = 0;
         lineChartMeasure.data.push(formattedValue);
         index--;
       }
 
     });
     while (lineChartMeasure.data.length < 12) {
-      const formattedValue = 11;
+      const formattedValue = 0;
       lineChartMeasure.data.push(formattedValue);
     }
     return lineChartMeasure;
