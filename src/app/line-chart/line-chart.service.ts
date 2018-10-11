@@ -10,6 +10,7 @@ import { Colors } from 'ng2-charts';
 
 @Injectable()
 export class LineChartService {
+  originId = '31850';
   configUrl = 'assets/config.json';
   endpointUrl = `${this.config.chartDataEndpoint}/value`;
 
@@ -48,7 +49,7 @@ export class LineChartService {
 
   getTemperature(numberOfDays: number) {
     const urlParameters = new HttpParams()
-      .set('originId', '31850')
+      .set('originId', this.originId)
       .set('numberOfDays', '' + numberOfDays)
       .set('enabledDaysInWeek', 'true,true,true,true,true,true,true');
     return this.http.get(
