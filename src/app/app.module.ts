@@ -1,3 +1,4 @@
+import { DoorSensorModule } from './door-sensor/door-sensor.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -37,6 +38,7 @@ import { AuthGuard } from './common/guards/auth.guard';
     RoutingModule,
     ToasterModule.forRoot(),
     NgbModule.forRoot(),
+    DoorSensorModule
   ],
   providers: [
     LineChartService,
