@@ -45,8 +45,8 @@ export class LineChartComponentConfigImpl implements ALineChartConfig {
           fontSize: 30,
         },
         ticks: {
-          min: 10, // minimum value
-          max: 30, // maximum value
+          min: 0, // minimum value
+          max: 1, // maximum value
         }
       }],
       xAxes: [{
