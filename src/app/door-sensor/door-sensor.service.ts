@@ -3,6 +3,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { AGeneralConfig } from '../common/domain/general-config';
 import { DatePipe } from '@angular/common';
 import { Colors } from 'ng2-charts';
+import { map } from 'rxjs/operators';
 
 @Injectable()
 export class DoorSensorService {
@@ -25,8 +26,8 @@ export class DoorSensorService {
     return this.http.get(
       this.endpointUrl,
       { params: urlParameters }
-    ).map((data: DoorChartDataResponse) =>
-      this.mapResponseData(data));
+    ).pipe(map((data: DoorChartDataResponse) =>
+      this.mapResponseData(data)));
   }
 
   mapResponseData(responseData: DoorChartDataResponse): Array<Colors> {
