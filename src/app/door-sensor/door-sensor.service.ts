@@ -48,23 +48,19 @@ export class DoorSensorService {
   transformToLineChartData(responseValues: any) {
     const lineChartMeasure: Colors = {
       label: this.datePipe.transform(responseValues.date, this.config.dateFormat),
-      data: []
+      data: new Array(12)
     };
-    responseValues.intervals.forEach((interval, index) => {
-      if (interval.index === index) {
-        const formattedValue = (!!interval.value) ? interval.weight : 0;
-        lineChartMeasure.data.push(formattedValue);
-      } else {
-        const formattedValue = 0;
-        lineChartMeasure.data.push(formattedValue);
-        index--;
+    const emptyValue = 0;
+    lineChartMeasure.data.fill(emptyValue);
+    lineChartMeasure.data = lineChartMeasure.data.map((dataValue, dataValueIndex) => {
+      const intervalFromServerResponse = responseValues.intervals.find(interval => interval.index === dataValueIndex);
+      let formattedValue = emptyValue;
+      if (!!intervalFromServerResponse && !!intervalFromServerResponse.value) {
+        formattedValue = intervalFromServerResponse.weight;
       }
-
+      return formattedValue;
     });
-    while (lineChartMeasure.data.length < 12) {
-      const formattedValue = 0;
-      lineChartMeasure.data.push(formattedValue);
-    }
+
     return lineChartMeasure;
   }
 }
