@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import 'rxjs/add/operator/map';
+import { map } from 'rxjs/operators';
 import { AGeneralConfig } from '../../common/domain/general-config';
 
 
@@ -16,7 +16,7 @@ export class AuthenticationService {
         const url = this.config.loginEndpoint;
         const params = { username: username };
         return this.http.post<any>(url, password, { params: params })
-            .map(user => {
+            .pipe(map(user => {
                 // login successful if there's a user in the response
                 if (!!user) {
                     // store user details and jwt token in local storage to keep user logged in between page refreshes
@@ -24,7 +24,7 @@ export class AuthenticationService {
                 }
 
                 return user;
-            });
+            }));
     }
 
     logout() {

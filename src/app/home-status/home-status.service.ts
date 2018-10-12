@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import 'rxjs/add/operator/map';
+import { map } from 'rxjs/operators';
 import { HomeEnvironment } from './domain/home-environment.model';
 import { Sensor } from './domain/sensor.model';
 import { Location } from './domain/location.model';
@@ -30,9 +30,9 @@ export class HomeStatusService {
         const url = this.config.homeStatusEndpoint;
 
         return this.http.get<HomeEnvironment>(url)
-            .map(homeEnvironment => {
+            .pipe(map(homeEnvironment => {
                 return this.mapHomeEnviroment(homeEnvironment);
-            });
+            }));
     }
 
     mapHomeEnviroment(homeEnvironment: HomeEnvironment): HomeEnvironment {

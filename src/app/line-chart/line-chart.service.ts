@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { DatePipe } from '@angular/common';
-import 'rxjs/add/observable/of';
-import 'rxjs/add/operator/map';
+import { map } from 'rxjs/operators';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { AGeneralConfig } from '../common/domain/general-config';
 import { Colors } from 'ng2-charts';
@@ -56,8 +55,9 @@ export class LineChartService {
     return this.http.get(
       this.configUrl,
       { params: urlParameters }
-    ).map((data: TemperatureChartDataResponse) =>
-      this.mapResponseData(data));
+    ).pipe(map((data: TemperatureChartDataResponse) =>
+      this.mapResponseData(data)));
+
   }
 
 }
