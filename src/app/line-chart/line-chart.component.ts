@@ -39,7 +39,7 @@ export class LineChartComponent implements OnInit {
     this.service.getTemperature(numberOfDays).subscribe(
       lineChartData => {
         this.lineChartData = lineChartData;
-        this.tableModel = this.updateTableModel(lineChartData);
+        this.tableModel = this.transformDataToTableModel(lineChartData);
         this.isDataAvailable = true;
       },
       error => {
@@ -56,7 +56,7 @@ export class LineChartComponent implements OnInit {
         lineChartData.forEach(dataElement => {
           this.lineChartData.push(dataElement);
         });
-        this.tableModel = this.updateTableModel(lineChartData);
+        this.tableModel = this.transformDataToTableModel(lineChartData);
       },
       error => {
         throw new ApplicationError(error);
@@ -71,7 +71,7 @@ export class LineChartComponent implements OnInit {
     anchor.download = filename + '.png';
   }
 
-  updateTableModel(lineChartData): TableModel {
+  transformDataToTableModel(lineChartData): TableModel {
     return {
       columns: ['Datum mjerenja', ...this.lineChartLabels],
       data: this.transformDataToTable(lineChartData)
