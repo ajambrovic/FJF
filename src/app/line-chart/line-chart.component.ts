@@ -32,10 +32,7 @@ export class LineChartComponent implements OnInit {
 
   ngOnInit(): void {
     this.service.getTemperature(this.numberOfDays).subscribe(
-      lineChartData => {
-        this.lineChartData = lineChartData;
-        this.isDataAvailable = true;
-      },
+      lineChartData => this.dataIsRecieved(lineChartData),
       error => {
         throw new ApplicationError(error);
       }
@@ -44,17 +41,18 @@ export class LineChartComponent implements OnInit {
 
   public onChange(newNumberOfDays) {
     this.numberOfDays = newNumberOfDays;
+    this.isDataAvailable = false;
     this.service.getTemperature(this.numberOfDays).subscribe(
-      lineChartData => {
-        this.lineChartData = [];
-        lineChartData.forEach(dataElement => {
-          this.lineChartData.push(dataElement);
-        });
-      },
+      lineChartData => this.dataIsRecieved(lineChartData),
       error => {
         throw new ApplicationError(error);
       }
     );
+  }
+
+  private dataIsRecieved(lineChartData: Colors[]) {
+    this.lineChartData = lineChartData;
+    this.isDataAvailable = true;
   }
 
   public downloadCanvas($event) {
