@@ -10,8 +10,8 @@ import { Colors } from 'ng2-charts';
 @Injectable()
 export class LineChartService {
   originId = '31850';
-  configUrl = 'assets/temperature-mock-data.json';
-  endpointUrl = `${this.config.chartDataEndpoint}/value`;
+  configURL = 'assets/temperature-mock-data.json';
+  endpointURL = `${this.config.chartDataEndpoint}/value`;
 
   constructor(
     private config: AGeneralConfig,
@@ -25,14 +25,14 @@ export class LineChartService {
       data: []
     };
     responseValues.values.forEach(value => {
-      // TODO: get formatted value and add it to lineChartMeasure data
+      const formattedValue = value.value;
+      lineChartMeasure.data.push(formattedValue);
     });
     return lineChartMeasure;
   }
 
   mapResponseData(responseData: TemperatureChartDataResponse): Array<Colors> {
     const lineChartData = [];
-    // TODO: Implement sort of responseData by Time
     responseData.forEach(responseValues => {
       const transformedData = this.transformToLineChartData(responseValues);
       if (!!transformedData) {
@@ -44,10 +44,13 @@ export class LineChartService {
   }
 
   getTemperature(numberOfDays: number) {
-    const urlParameters = new HttpParams();
+    const urlParameters = new HttpParams().set('originId', this.originId)
+      .set('numberOfDays', '' + numberOfDays)
+      .set('enabledDaysInWeek', 'true,true,true,true,true,true,true');
+    const getRequestOptions = { params: urlParameters };
     return this.http.get(
-      this.configUrl,
-      { params: urlParameters }
+      this.endpointURL,
+      getRequestOptions
     ).pipe(map((data: TemperatureChartDataResponse) =>
       this.mapResponseData(data)));
   }

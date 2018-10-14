@@ -50,10 +50,10 @@ export class LineChartComponent implements OnInit {
     // TODO: set the days, get the data from the server and handle the responses
   }
 
-  public downloadCanvas($event) {
-    const anchor = <HTMLAnchorElement>$event.target;
+  public downloadCanvas(eventTarget: HTMLAnchorElement) {
+    const anchor = eventTarget;
     anchor.href = this.temperatureChart.nativeElement.toDataURL();
-    const filename = 'Temperatura: '; // TODO: Add label names to filendame from lineChartData
+    const filename = 'Temperatura: '; // TODO: Add label names to filename from lineChartData
     anchor.download = filename + '.png';
   }
 }
