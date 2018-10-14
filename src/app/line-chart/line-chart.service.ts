@@ -24,19 +24,17 @@ export class LineChartService {
       label: this.datePipe.transform(responseValues.date, this.config.dateFormat),
       data: []
     };
+    // TODO: fill missing values by filling creating an array filled with empty values
+    // and then map that array to indexes in values of responseValues
     responseValues.values.forEach(value => {
-      const formattedValue = value.value.toFixed(2);
-      lineChartMeasure.data.push(formattedValue);
+      // TODO: get formatted value and add it to lineChartMeasure data
     });
     return lineChartMeasure;
   }
 
   mapResponseData(responseData: TemperatureChartDataResponse): Array<Colors> {
-    // to config
     const lineChartData = [];
-    responseData.sort(function (a, b) {
-      return new Date(b.date).getTime() - new Date(a.date).getTime();
-    });
+    // TODO: Implement sort of responseData by Time
     responseData.forEach(responseValues => {
       const transformedData = this.transformToLineChartData(responseValues);
       if (!!transformedData) {
@@ -48,16 +46,12 @@ export class LineChartService {
   }
 
   getTemperature(numberOfDays: number) {
-    const urlParameters = new HttpParams()
-      .set('originId', this.originId)
-      .set('numberOfDays', '' + numberOfDays)
-      .set('enabledDaysInWeek', 'true,true,true,true,true,true,true');
+    const urlParameters = new HttpParams();
     return this.http.get(
       this.configUrl,
       { params: urlParameters }
     ).pipe(map((data: TemperatureChartDataResponse) =>
       this.mapResponseData(data)));
-
   }
 
 }

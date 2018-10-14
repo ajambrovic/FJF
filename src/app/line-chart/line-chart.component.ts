@@ -31,35 +31,29 @@ export class LineChartComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.service.getTemperature(this.numberOfDays).subscribe(
-      lineChartData => this.dataIsRecieved(lineChartData),
+    this.getDataForNumberOfDays(this.numberOfDays);
+  }
+
+  private getDataForNumberOfDays(numberOfDays: number) {
+    this.service.getTemperature(numberOfDays).subscribe(
+      lineChartData => {
+        this.lineChartData = lineChartData;
+        this.isDataAvailable = true;
+      },
       error => {
         throw new ApplicationError(error);
       }
     );
   }
 
-  public onChange(newNumberOfDays) {
-    this.numberOfDays = newNumberOfDays;
-    this.isDataAvailable = false;
-    this.service.getTemperature(this.numberOfDays).subscribe(
-      lineChartData => this.dataIsRecieved(lineChartData),
-      error => {
-        throw new ApplicationError(error);
-      }
-    );
-  }
-
-  private dataIsRecieved(lineChartData: Colors[]) {
-    this.lineChartData = lineChartData;
-    this.isDataAvailable = true;
+  public onChange(newNumberOfDays: number) {
+    // TODO: set the days, get the data from the server and handle the responses
   }
 
   public downloadCanvas($event) {
     const anchor = <HTMLAnchorElement>$event.target;
     anchor.href = this.temperatureChart.nativeElement.toDataURL();
-    // set the anchors 'download' attibute (name of the file to be downloaded)
-    const filename = 'Temperatura: ' + this.lineChartData[0].label + '_' + this.lineChartData[this.lineChartData.length - 1].label;
+    const filename = 'Temperatura: '; // TODO: Add label names to filendame from lineChartData
     anchor.download = filename + '.png';
   }
 }
