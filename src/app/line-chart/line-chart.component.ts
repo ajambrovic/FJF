@@ -3,6 +3,7 @@ import { LineChartService } from './line-chart.service';
 import { ApplicationError } from '../common/domain/application.error';
 import { ALineChartConfig } from './line-chart-config';
 import { Colors } from 'ng2-charts';
+import { TableModel } from '../sensor-data-table/domain/table-model';
 
 @Component({
   selector: 'app-line-chart',
@@ -14,6 +15,7 @@ export class LineChartComponent implements OnInit {
 
   public isDataAvailable = false;
   public lineChartData: Array<Colors>;
+  public tableModel: TableModel;
 
   // config start
   public lineChartType = this.lineChartConfig.lineChartType;
@@ -29,7 +31,6 @@ export class LineChartComponent implements OnInit {
     private service: LineChartService
   ) { }
 
-
   ngOnInit(): void {
     this.getDataForNumberOfDays(this.numberOfDays);
   }
@@ -38,6 +39,7 @@ export class LineChartComponent implements OnInit {
     this.service.getTemperature(numberOfDays).subscribe(
       lineChartData => {
         this.lineChartData = lineChartData;
+        this.tableModel = this.updateTableModel(lineChartData);
         this.isDataAvailable = true;
       },
       error => {
@@ -47,7 +49,19 @@ export class LineChartComponent implements OnInit {
   }
 
   public onChange(newNumberOfDays: number) {
-    // TODO: set the days, get the data from the server and handle the responses
+    this.numberOfDays = newNumberOfDays;
+    this.service.getTemperature(this.numberOfDays).subscribe(
+      lineChartData => {
+        this.lineChartData = [];
+        lineChartData.forEach(dataElement => {
+          this.lineChartData.push(dataElement);
+        });
+        this.tableModel = this.updateTableModel(lineChartData);
+      },
+      error => {
+        throw new ApplicationError(error);
+      }
+    );
   }
 
   public downloadCanvas(eventTarget: HTMLAnchorElement) {
@@ -55,5 +69,21 @@ export class LineChartComponent implements OnInit {
     anchor.href = this.temperatureChart.nativeElement.toDataURL();
     const filename = 'Temperatura: '; // TODO: Add label names to filename from lineChartData
     anchor.download = filename + '.png';
+  }
+
+  updateTableModel(lineChartData): TableModel {
+    return {
+      columns: ['Datum mjerenja', ...this.lineChartLabels],
+      data: this.transformDataToTable(lineChartData)
+    };
+  }
+
+  transformDataToTable(data: Array<Colors>) {
+    return data.map(colors => {
+      return {
+        date: colors.label,
+        data: colors.data
+      };
+    });
   }
 }

@@ -22,6 +22,7 @@ import { HomeStatusModule } from './home-status/home-status.module';
 import { ALineChartConfig } from './line-chart/line-chart-config';
 import { AGeneralConfig } from './common/domain/general-config';
 import { AuthGuard } from './common/guards/auth.guard';
+import { SensorDataTableModule } from './sensor-data-table/sensor-data-table.module';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { AuthGuard } from './common/guards/auth.guard';
     HttpClientModule,
     RoutingModule,
     ToasterModule.forRoot(),
-    NgbModule.forRoot()
+    NgbModule.forRoot(),
+    SensorDataTableModule
   ],
   providers: [
     LineChartService,

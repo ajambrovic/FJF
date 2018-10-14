@@ -6,13 +6,15 @@ import 'chart.js/dist/Chart.min.js';
 import { ChartsModule } from 'ng2-charts';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
+import { SensorDataTableModule } from '../sensor-data-table/sensor-data-table.module';
 
 @NgModule({
   imports: [
     CommonModule,
     ChartsModule,
     NgbModule,
-    FormsModule
+    FormsModule,
+    SensorDataTableModule
   ],
   declarations: [LineChartComponent],
   providers: [LineChartService],
