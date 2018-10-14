@@ -3,6 +3,7 @@ import { LineChartService } from './line-chart.service';
 import { ApplicationError } from '../common/domain/application.error';
 import { ALineChartConfig } from './line-chart-config';
 import { Colors } from 'ng2-charts';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-line-chart',
@@ -32,6 +33,7 @@ export class LineChartComponent implements OnInit {
 
   ngOnInit(): void {
     this.getDataForNumberOfDays(this.numberOfDays);
+    setInterval(() => { this.getDataForNumberOfDays(this.numberOfDays); }, environment.refreshInterval);
   }
 
   private getDataForNumberOfDays(numberOfDays: number) {

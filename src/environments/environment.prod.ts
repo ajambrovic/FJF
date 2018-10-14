@@ -3,7 +3,8 @@ import { ALineChartConfig } from '../app/line-chart/line-chart-config';
 import { AGeneralConfig } from '../app/common/domain/general-config';
 
 export const environment = {
-  production: true
+  production: true,
+  refreshInterval: 60000
 };
 
 @Injectable()
