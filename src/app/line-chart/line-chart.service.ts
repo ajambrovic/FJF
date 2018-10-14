@@ -24,8 +24,6 @@ export class LineChartService {
       label: this.datePipe.transform(responseValues.date, this.config.dateFormat),
       data: []
     };
-    // TODO: fill missing values by filling creating an array filled with empty values
-    // and then map that array to indexes in values of responseValues
     responseValues.values.forEach(value => {
       // TODO: get formatted value and add it to lineChartMeasure data
     });
