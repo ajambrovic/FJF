@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { map } from 'rxjs/operators';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { AGeneralConfig } from '../common/domain/general-config';
 import { Colors } from 'ng2-charts';
 
@@ -10,9 +10,10 @@ import { Colors } from 'ng2-charts';
 })
 export class DoorSensorService {
 
-  // originId = '31850';
+  originId = '31973';
+  intervalDurationMin = '120';
   mockDataURL = 'assets/door-mock-data.json';
-  // endpointURL = `${this.config.chartDataEndpoint}/value`;
+  endpointURL = `${this.config.chartDataEndpoint}/reedopen`;
 
   constructor(
     private config: AGeneralConfig,
@@ -49,14 +50,15 @@ export class DoorSensorService {
   }
 
   getDoorSensorData(numberOfDays: number) {
-    /*const urlParameters = new HttpParams()
+    const urlParameters = new HttpParams()
       .set('originId', this.originId)
       .set('numberOfDays', '' + numberOfDays)
+      .set('intervalDurationMin', '' + this.intervalDurationMin)
       .set('enabledDaysInWeek', 'true,true,true,true,true,true,true');
-    const getRequestOptions = { params: urlParameters };*/
+    const getRequestOptions = { params: urlParameters };
     return this.http.get(
-      this.mockDataURL,
-      // getRequestOptions
+      this.endpointURL,
+      getRequestOptions
     ).pipe(map((data: TemperatureChartDataResponse) =>
       this.mapResponseData(data)));
   }
