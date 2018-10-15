@@ -27,13 +27,16 @@ export class DoorSensorService {
       data: []
     };
     const emptyValue = 0;
+    const emptyValues = new Array(12);
+    emptyValues.fill(emptyValue);
     responseValues.intervals.forEach(interval => {
       let formattedValue = emptyValue;
       if (interval.value === true) {
         formattedValue = interval.weight.toFixed(4);
       }
-      lineChartMeasure.data.push(formattedValue);
+      emptyValues[interval.index] = formattedValue;
     });
+    lineChartMeasure.data = emptyValues;
     return lineChartMeasure;
   }
 
