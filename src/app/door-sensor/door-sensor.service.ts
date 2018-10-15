@@ -29,7 +29,7 @@ export class DoorSensorService {
     responseValues.intervals.forEach(interval => {
       let formattedValue = emptyValue;
       if (interval.value === true) {
-        formattedValue = interval.value.weight;
+        formattedValue = interval.weight * 30;
       }
       lineChartMeasure.data.push(formattedValue);
     });
