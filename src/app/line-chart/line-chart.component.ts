@@ -55,7 +55,8 @@ export class LineChartComponent implements OnInit {
   public downloadCanvas(eventTarget: HTMLAnchorElement) {
     const anchor = eventTarget;
     anchor.href = this.temperatureChart.nativeElement.toDataURL();
-    const filename = 'Temperatura: '; // TODO: Add label names to filename from lineChartData
+    const filename = 'Temperatura_' + this.lineChartData[0].label + '_' +
+      this.lineChartData[this.lineChartData.length - 1].label;
     anchor.download = filename + '.png';
   }
 }
