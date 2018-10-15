@@ -22,6 +22,8 @@ import { ALineChartConfig } from './line-chart/line-chart-config';
 import { AGeneralConfig } from './common/domain/general-config';
 import { AuthGuard } from './common/guards/auth.guard';
 
+import { DoorSensorModule } from './door-sensor/door-sensor.module';
+
 @NgModule({
   declarations: [
     AppComponent
@@ -36,7 +38,8 @@ import { AuthGuard } from './common/guards/auth.guard';
     HttpClientModule,
     RoutingModule,
     ToasterModule.forRoot(),
-    NgbModule.forRoot()
+    NgbModule.forRoot(),
+    DoorSensorModule
   ],
   providers: [
     LineChartService,
