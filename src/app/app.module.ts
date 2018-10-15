@@ -18,6 +18,7 @@ import { GlobalErrorHandler } from './common/global-error.handler';
 import { GeneralConfigImpl, LineChartComponentConfigImpl } from '../environments/environment';
 
 import { HomeStatusModule } from './home-status/home-status.module';
+import { HumiditySensorModule } from './humidity-sensor/humidity-sensor.module';
 import { ALineChartConfig } from './line-chart/line-chart-config';
 import { AGeneralConfig } from './common/domain/general-config';
 import { AuthGuard } from './common/guards/auth.guard';
@@ -32,6 +33,7 @@ import { AuthGuard } from './common/guards/auth.guard';
     LoginModule,
     NavbarModule,
     HomeStatusModule,
+    HumiditySensorModule,
     LineChartModule,
     HttpClientModule,
     RoutingModule,
