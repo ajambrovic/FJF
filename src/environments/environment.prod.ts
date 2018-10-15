@@ -11,8 +11,8 @@ export class GeneralConfigImpl implements AGeneralConfig {
   production = true;
   homeId = 'NGE5OTQzZmMtZmM3ZC00N2U5LWFmODQtM2E4NTdiYzBkZmYy';
   userId = 'ODA3MjIxOTMtYjJjMy00MmVlLTllODctMDVmNDY1N2MxOWFj';
-  backendUrl = 'https://demo.smarthabits.io/portal-backend/';
-  loginEndpoint = 'https://demo.smarthabits.io/login-service/login/caregiver';
+  backendUrl = 'http://129.192.69.187/portal-backend/';
+  loginEndpoint = 'http://129.192.69.187/login-service/login/caregiver';
   homeStatusEndpoint = this.backendUrl + `homes/${this.homeId}/aggregatedstatus`;
   chartDataEndpoint = this.backendUrl + `users/${this.userId}/chartdata`;
   dateFormat = 'dd.MM.yyyy';
