@@ -25,7 +25,7 @@ export class LineChartService {
       data: []
     };
     responseValues.values.forEach(value => {
-      const formattedValue = value.value;
+      const formattedValue = value.value.toFixed(2);
       lineChartMeasure.data.push(formattedValue);
     });
     return lineChartMeasure;
