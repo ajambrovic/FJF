@@ -47,7 +47,9 @@ export class LineChartComponent implements OnInit {
   }
 
   public onChange(newNumberOfDays: number) {
-    // TODO: set the days, get the data from the server and handle the responses
+    this.isDataAvailable = false;
+    this.numberOfDays = newNumberOfDays;
+    this.getDataForNumberOfDays(newNumberOfDays);
   }
 
   public downloadCanvas(eventTarget: HTMLAnchorElement) {
