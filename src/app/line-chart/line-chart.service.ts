@@ -9,7 +9,7 @@ import { Colors } from 'ng2-charts';
 
 @Injectable()
 export class LineChartService {
-  originId = '31850';
+  originId = '31794';
   mockDataURL = 'assets/temperature-mock-data.json';
   endpointURL = `${this.config.chartDataEndpoint}/value`;
 
