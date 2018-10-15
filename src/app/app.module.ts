@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { DatePipe } from '@angular/common';
 import { NgModule, ErrorHandler } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -54,7 +55,8 @@ import { DoorSensorModule } from './door-sensor/door-sensor.module';
     { provide: AGeneralConfig, useExisting: GeneralConfigImpl },
     { provide: ALineChartConfig, useExisting: LineChartComponentConfigImpl },
     LineChartComponentConfigImpl,
-    GeneralConfigImpl
+    GeneralConfigImpl,
+    DatePipe
   ],
   bootstrap: [AppComponent]
 })
