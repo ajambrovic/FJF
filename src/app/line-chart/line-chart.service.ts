@@ -50,7 +50,7 @@ export class LineChartService {
       .set('enabledDaysInWeek', 'true,true,true,true,true,true,true');
     const getRequestOptions = { params: urlParameters };
     return this.http.get(
-      this.endpointURL,
+      this.mockDataURL,
       getRequestOptions
     ).pipe(map((data: TemperatureChartDataResponse) =>
       this.mapResponseData(data)));
