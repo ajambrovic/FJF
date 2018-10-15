@@ -15,7 +15,7 @@ export const environment = {
 export class GeneralConfigImpl implements AGeneralConfig {
   production = false;
   homeId = 'ZGM2NzFjNTAtOGFkNy00OGQwLWIwN2ItN2Q5MGI2YmMyNWEz';
-  userId = 'ODA3MjIxOTMtYjJjMy00MmVlLTllODctMDVmNDY1N2MxOWFj';
+  userId = 'MTJlNTMyZWYtYzZmNy00NzUxLThjZTktOGU4YjBiZjg3ZDAx';
   backendUrl = 'http://129.192.69.187/portal-backend/';
   loginEndpoint = 'http://129.192.69.187/login-service/login/caregiver';
   homeStatusEndpoint = this.backendUrl + `homes/${this.homeId}/aggregatedstatus`;
