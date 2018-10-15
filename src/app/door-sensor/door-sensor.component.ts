@@ -17,7 +17,39 @@ export class DoorSensorComponent implements OnInit {
   // config start
   public lineChartType = this.lineChartConfig.lineChartType;
   public numberOfDays = this.lineChartConfig.defaultNumberOfDays;
-  public lineChartOptions = this.lineChartConfig.lineChartOptions;
+  public lineChartOptions = {
+    responsive: true,
+    legend: {
+      position: 'top',
+    },
+    scales: {
+      yAxes: [{
+        // scale label
+        scaleLabel: {
+          // display property
+          display: true,
+          // actual label
+          labelString: 'Aktivnost',
+          fontSize: 30,
+        },
+        ticks: {
+          min: 0, // minimum value
+          max: 1, // maximum value
+        }
+      }],
+      xAxes: [{
+        // scale label
+        scaleLabel: {
+          // display property
+          display: true,
+
+          // actual label
+          labelString: 'Doba dana',
+          fontSize: 30,
+        },
+      }]
+    }
+  };
   public lineChartColors = this.lineChartColors;
   public selectValues = this.lineChartConfig.selectDropdownValues;
   public lineChartLabels = this.lineChartConfig.lineChartLabels;
