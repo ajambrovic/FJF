@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule, DatePipe } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { LineChartService } from './line-chart.service';
 import { LineChartComponent } from './line-chart.component';
 import 'chart.js/dist/Chart.min.js';
@@ -15,7 +15,7 @@ import { FormsModule } from '@angular/forms';
     FormsModule
   ],
   declarations: [LineChartComponent],
-  providers: [LineChartService, DatePipe],
+  providers: [LineChartService],
   exports: [LineChartComponent]
 })
 export class LineChartModule { }
