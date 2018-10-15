@@ -9,7 +9,8 @@ import { AGeneralConfig } from '../app/common/domain/general-config';
 
 export const environment = {
   production: false,
-  refreshInterval: 20000
+  liveRefreshInterval: 20000,
+  historyRefreshInterval: 8 * 60 * 1000
 };
 
 @Injectable()

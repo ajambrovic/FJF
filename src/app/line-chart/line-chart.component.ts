@@ -33,7 +33,7 @@ export class LineChartComponent implements OnInit {
 
   ngOnInit(): void {
     this.getDataForNumberOfDays(this.numberOfDays);
-    setInterval(() => { this.getDataForNumberOfDays(this.numberOfDays); }, environment.refreshInterval);
+    setInterval(() => { this.getDataForNumberOfDays(this.numberOfDays); }, environment.historyRefreshInterval);
   }
 
   private getDataForNumberOfDays(numberOfDays: number) {

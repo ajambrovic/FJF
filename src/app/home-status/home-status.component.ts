@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HomeEnvironment } from './domain/home-environment.model';
 import { HomeStatusService } from './home-status.service';
+import { environment } from '../../environments/environment';
 
 @Component({
     selector: 'app-home-status',
@@ -18,6 +19,11 @@ export class HomeStatusComponent implements OnInit {
         this.homeStatusService.getHomeStatus().subscribe(
             data => { this.homeEnvironment = data; }
         );
+        setInterval(() => {
+            this.homeStatusService.getHomeStatus().subscribe(
+                data => { this.homeEnvironment = data; }
+            );
+        }, environment.historyRefreshInterval);
     }
 
 }
